@@ -1,0 +1,14 @@
+{
+  "name": "consommacteur",
+  "version": "1.0.0",
+  "description": "it's a school project for manage electricity consumption",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chaudron Dahiez Lecat",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.8.7"
+  }
+}
