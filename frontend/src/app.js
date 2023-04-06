@@ -1,2 +1,9 @@
+import { createRoot } from 'react-dom/client';
+import Menu from './menu';
 
-console.log('Welcome to consommacteur !')
+const root = createRoot(document.querySelector('.appContainer'));
+root.render(
+	<>
+		<Menu />
+	</>
+);
