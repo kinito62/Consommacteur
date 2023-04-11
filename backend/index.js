@@ -10,7 +10,7 @@ const app = express();
 
 await connectToDb();
 await sequelize.sync({
-  // force: true,
+  force: true,
   alter: true,
 });
 

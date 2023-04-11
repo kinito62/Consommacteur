@@ -6,8 +6,6 @@ const Room = sequelize.define("Room", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-});
-
-Room.Place = Room.belongsTo(Place);
+})
 
 export default Room;

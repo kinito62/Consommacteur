@@ -8,6 +8,4 @@ const Sensor = sequelize.define("Sensor", {
   },
 });
 
-Sensor.Room = Sensor.belongsTo(Room);
-
 export default Sensor;

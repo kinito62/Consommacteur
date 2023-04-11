@@ -6,17 +6,33 @@ import {
   getHouses,
   updateHouse,
 } from "../controllers/houseController.js";
+import { createHouseArea, deleteHouseArea, getHouseArea, getHouseAreas, updateHouseArea } from "../controllers/areaController.js";
+import { getHouseById } from "../middlewares/houseMiddleware.js";
 
 const houseRoutes = Router();
 
 houseRoutes.get("/", getHouses);
 
-houseRoutes.get("/:id", getHouse);
+houseRoutes.get("/:houseId", getHouse);
 
 houseRoutes.post("/", createHouse);
 
-houseRoutes.patch("/:id", updateHouse);
+houseRoutes.patch("/:houseId", updateHouse);
 
-houseRoutes.delete("/:id", deleteHouse);
+houseRoutes.delete("/:houseId", deleteHouse);
+
+const houseAreaRoutes = Router();
+
+houseAreaRoutes.get("/", getHouseAreas);
+
+houseAreaRoutes.get("/:areaId", getHouseArea);
+
+houseAreaRoutes.post("/", createHouseArea);
+
+houseAreaRoutes.patch("/:areaId", updateHouseArea);
+
+houseAreaRoutes.delete("/:areaId", deleteHouseArea);
+
+houseRoutes.use("/:houseId/areas", getHouseById, houseAreaRoutes);
 
 export default houseRoutes;

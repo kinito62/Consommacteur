@@ -4,7 +4,7 @@ import { createSchema } from "../validations/houseValidation.js";
 
 const getHouse = async (req, res) => {
   const house = await House.findOne({
-    where: { userId: req.user.id, id: req.params.id },
+    where: { userId: req.user.id, id: req.params.houseId },
   });
   if (house) {
     res.send(house);
@@ -23,8 +23,8 @@ const getHouses = async (req, res) => {
 };
 
 const createHouse = async (req, res) => {
-  const error = createSchema.validate(req.body);
-  if (!error) return res.status(400).send(error);
+  const error = createSchema.validate(req.body).error;
+  if (error) return res.status(400).send(error);
 
   const { name } = req.body;
   const house = new House({
@@ -45,12 +45,12 @@ const createHouse = async (req, res) => {
 };
 
 const updateHouse = async (req, res) => {
-  const error = createSchema.validate(req.body);
-  if (!error) return res.status(400).send(error);
+  const error = createSchema.validate(req.body).error;
+  if (error) return res.status(400).send(error);
 
   const { name } = req.body;
   const updatedHouse = await House.findOne({
-    where: { userId: req.user.id, id: req.params.id },
+    where: { userId: req.user.id, id: req.params.houseId },
   });
   if (!updatedHouse) {
     return res.status(404).json({ message: "This house doesn't exist" });
@@ -65,8 +65,9 @@ const updateHouse = async (req, res) => {
 
 const deleteHouse = (req, res) => {
   House.destroy({
-      where: {
-        id: req.params.id,
+    where: {
+        userId: req.user.id,
+        id: req.params.houseId,
       },
     })
     .then((deletedHouse) => {
