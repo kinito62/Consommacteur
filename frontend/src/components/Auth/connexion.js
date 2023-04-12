@@ -17,6 +17,9 @@ export default class connexion extends React.Component {
 		return (
             <div className='layoutForm'>
             <div className="container">
+                <div className="titleForm">
+                <a>Connexion</a>
+                </div>
                 <form className="inscriptionForm" onSubmit={event => this.handleSubmit(event)}>
                     <div className="row">
                         <div className="col-25">
@@ -36,13 +39,13 @@ export default class connexion extends React.Component {
                     </div>
                     
                     <div className="row">
-                        <button type="submit">Inscription</button>
+                        <button type="submit">connexion</button>
                     </div>
                 </form>
                 <div className="row">
                     <div className="col-25">
-                        <div className="inscription">
-                            <NavLink to="/inscription">M'inscrire</NavLink>
+                        <div className="connexion">
+                            <NavLink to="/inscription">Me connecter</NavLink>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,13 @@
     
   }
 
+  .titleForm{
+    text-decoration: none;
+    color: #ffa101;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+  }
 
   .col-25 {
     float: left;

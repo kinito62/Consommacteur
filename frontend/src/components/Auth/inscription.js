@@ -23,6 +23,9 @@ export default class inscription extends React.Component {
 		return (
             <div className='layoutForm'>
             <div className="container">
+            <div className="titleForm">
+                <a>Inscription</a>
+                </div>
                 <form className="inscriptionForm" onSubmit={event => this.handleSubmit(event)}>
                     <div className="row">
                         <div className="col-25">
