@@ -33,13 +33,16 @@ module.exports = (env, { mode }) => ({
 	),
 	// configuration du fast-refresh [3/3]
 	devServer: {
+		historyApiFallback: true,
 		// choix du port du serveur webpack qui va servir notre application
 		port: 8000,
 		// configuration du dossier racine du serveur
 		static: {
 			directory: './',
 			watch: false, // évite de recharger toute la page quand un fichier est modifié
+		
 		},
+		
 	},
 	devtool: 'source-map',
 });
