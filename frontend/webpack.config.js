@@ -16,6 +16,9 @@ module.exports = (env, { mode }) => ({
 	target: ['web', 'es5'],
 	// connexion webpack <-> babel :
 	module: {
+
+		
+
 		rules: [
 			{
 				test: /\.js$/, // tous les fichiers js ...

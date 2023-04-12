@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla:wght@200;400&display=swap");
 
+
+
 * {
+  
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -12,6 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #31525b;
 }
 
 .container {

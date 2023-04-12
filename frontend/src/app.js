@@ -8,7 +8,8 @@ import Places from './components/places';
 import Offers from './components/offers';
 import Suggestions from './components/suggestions';
 import Contacts from './components/contacts';
-import Connexion from './components/connexion';
+import Connexion from './components/Auth/connexion';
+import Inscription from './components/Auth/inscription';
 
 
 
@@ -26,8 +27,7 @@ root.render(
 				<Route path="/suggestions" element={<Suggestions/>} />
 				<Route path="/contact" element={<Contacts/>} />
 				<Route path="/connexion" element={<Connexion/>} />
-
-
+				<Route path="/inscription" element={<Inscription/>} />
 				
 			</Routes>
 		</BrowserRouter>

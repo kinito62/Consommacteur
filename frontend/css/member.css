@@ -1,0 +1,82 @@
+
+.container {
+    
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    margin-top:20px;
+    
+  }
+
+
+  .col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+  }
+  .col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+  }
+
+  button[type=submit] {
+    background-color: #31525b;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-top:10px;
+  }
+
+  .connexion, .inscription{
+    background-color: #b3dee5;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    margin-top:10px;
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  label {
+    content: "";
+    display: table;
+    clear: both;
+    color: #31525b;
+  }
+
+  input[type=text], input[type=password], input[type=email], select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  @media screen and (max-width: 600px) {
+    .lastName, .firstName, .email, .password, .confirmPassword, .connexion, .inscription, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+
+  }
+
+  @media screen and (min-width: 700px) {
+    .layoutForm{
+        max-width: 60%;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 1rem;
+    }
+  }

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { NavLink } from "react-router-dom";
 
+
 export default function Menu() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
 
@@ -62,7 +63,7 @@ export default function Menu() {
             <NavLink to="/contact">Nous contacter</NavLink>
           </li>
 		  <li>
-            <NavLink to="/connexion">Connexion</NavLink>
+            <NavLink to="/connexion">Espace Membre</NavLink>
           </li>
         </ul>
       </div>
