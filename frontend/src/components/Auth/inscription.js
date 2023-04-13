@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
+import '../../../css/member.css';
 
 export default class inscription extends React.Component {
     lastNameInput = React.createRef();
@@ -29,7 +30,7 @@ export default class inscription extends React.Component {
                 <form className="inscriptionForm" onSubmit={event => this.handleSubmit(event)}>
                     <div className="row">
                         <div className="col-25">
-                            <label for="lastName">nom </label>
+                            <label for="lastName">Nom* </label>
                         </div> 
                         <div className="col-75">
                             <input required type="text" id="lastName" ref={this.LastName} />
@@ -37,7 +38,7 @@ export default class inscription extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-25">
-                            <label for="firstName">prénom </label>
+                            <label for="firstName">Prénom* </label>
                         </div>
                         <div className="col-75">
                             <input required type="text" id="firstName" ref={this.firstName} />
@@ -45,7 +46,7 @@ export default class inscription extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-25">
-                            <label for="email">Email </label>
+                            <label for="email">Email* </label>
                         </div>
                         <div className="col-75">
                             <input required type="email" id="email" ref={this.email} />
@@ -53,7 +54,7 @@ export default class inscription extends React.Component {
                     </div>
                     <div className="row">   
                         <div className="col-25">
-                            <label for="passWord">mot de passe </label>
+                            <label for="passWord">Mot de passe* </label>
                         </div>
                         <div className="col-75">
                             <input required type="password" id="passWord" ref={this.password} />
@@ -61,7 +62,7 @@ export default class inscription extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-25">
-                            <label for="confirmPassword">mot de passe </label>
+                            <label for="confirmPassword"> Confirmation mot de passe* </label>
                         </div>
                         <div className="col-75">
                             <input required type="password" id="ConfirmpassWord" ref={this.confirmPassWord} />
@@ -73,11 +74,9 @@ export default class inscription extends React.Component {
                     </div>
                 </form>
                 <div className="row">
-                    <div className="col-25">
                         <div className="connexion">
-                            <NavLink to="/connexion">Me connecter</NavLink>
+                            <NavLink to="/connexion">Connexion</NavLink>
                         </div>
-                    </div>
                 </div>
             </div>
             </div>

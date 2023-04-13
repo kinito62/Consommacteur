@@ -10,7 +10,7 @@ import Suggestions from './components/suggestions';
 import Contacts from './components/contacts';
 import Connexion from './components/Auth/connexion';
 import Inscription from './components/Auth/inscription';
-
+import Profile from './components/Auth/profile';
 
 
 const root = createRoot(document.querySelector('.appContainer'));
@@ -28,7 +28,7 @@ root.render(
 				<Route path="/contact" element={<Contacts/>} />
 				<Route path="/connexion" element={<Connexion/>} />
 				<Route path="/inscription" element={<Inscription/>} />
-				
+				<Route path='/profile' element={<Profile/>} />
 			</Routes>
 		</BrowserRouter>
 </>

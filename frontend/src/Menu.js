@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { NavLink } from "react-router-dom";
 
+import '../css/header.css'
 
 export default function Menu() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)

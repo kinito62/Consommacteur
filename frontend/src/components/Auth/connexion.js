@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
-
+//import '../../../css/member.css';
 export default class connexion extends React.Component {
     emailInput = React.createRef();
     password = React.createRef();
@@ -23,7 +23,7 @@ export default class connexion extends React.Component {
                 <form className="inscriptionForm" onSubmit={event => this.handleSubmit(event)}>
                     <div className="row">
                         <div className="col-25">
-                            <label for="email">Email </label>
+                            <label htmlFor="email">Email </label>
                         </div>
                         <div className="col-75">
                             <input required type="email" id="email" ref={this.email} />
@@ -31,7 +31,7 @@ export default class connexion extends React.Component {
                     </div>
                     <div className="row">   
                         <div className="col-25">
-                            <label for="passWord">mot de passe </label>
+                            <label htmlFor="passWord">Mot de passe </label>
                         </div>
                         <div className="col-75">
                             <input required type="password" id="passWord" ref={this.password} />
@@ -43,11 +43,10 @@ export default class connexion extends React.Component {
                     </div>
                 </form>
                 <div className="row">
-                    <div className="col-25">
                         <div className="connexion">
-                            <NavLink to="/inscription">Me connecter</NavLink>
+                            <NavLink to="/inscription">M'inscrire</NavLink>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
             </div>

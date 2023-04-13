@@ -18,12 +18,14 @@
 
   .col-25 {
     float: left;
-    width: 25%;
+    width: 35%;
     margin-top: 6px;
+    
+    
   }
   .col-75 {
     float: left;
-    width: 75%;
+    width: 65%;
     margin-top: 6px;
   }
 
@@ -45,8 +47,9 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    float: left;
+    float: center;
     margin-top:10px;
+    max-width: 120px;
   }
 
   .row:after {
@@ -56,9 +59,8 @@
   }
 
   label {
-    content: "";
-    display: table;
-    clear: both;
+    padding: 12px 12px 12px 0;
+    display: inline-block;
     color: #31525b;
   }
 

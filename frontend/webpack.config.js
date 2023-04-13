@@ -17,9 +17,15 @@ module.exports = (env, { mode }) => ({
 	// connexion webpack <-> babel :
 	module: {
 
-		
 
 		rules: [
+			
+				
+			{
+                test: /.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },	 
+	
 			{
 				test: /\.js$/, // tous les fichiers js ...
 				exclude: /node_modules/, // ... sauf le dossier node_modules ...
