@@ -1,0 +1,17 @@
+.lh {
+    
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    margin-top:20px;
+    height: 1500px;
+}
+
+@media screen and (min-width: 700px) {
+    .lh{
+        max-width: 75%;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 1rem;
+    }
+}

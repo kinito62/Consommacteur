@@ -16,7 +16,16 @@ module.exports = (env, { mode }) => ({
 	target: ['web', 'es5'],
 	// connexion webpack <-> babel :
 	module: {
+
+
 		rules: [
+			
+				
+			{
+                test: /.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },	 
+	
 			{
 				test: /\.js$/, // tous les fichiers js ...
 				exclude: /node_modules/, // ... sauf le dossier node_modules ...
@@ -33,13 +42,16 @@ module.exports = (env, { mode }) => ({
 	),
 	// configuration du fast-refresh [3/3]
 	devServer: {
+		historyApiFallback: true,
 		// choix du port du serveur webpack qui va servir notre application
 		port: 8000,
 		// configuration du dossier racine du serveur
 		static: {
 			directory: './',
 			watch: false, // évite de recharger toute la page quand un fichier est modifié
+		
 		},
+		
 	},
 	devtool: 'source-map',
 });
