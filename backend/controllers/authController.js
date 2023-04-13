@@ -24,7 +24,7 @@ const register = async (req, res) => {
   });
 
   const error = await user.validate().catch(err => {return err});
-  if (error instanceof error) {
+  if (error instanceof ValidationError) {
     res.status(400).json(error);
     console.log(error);
   } else {

@@ -58,7 +58,7 @@ const getAreaSensors = async (req, res) => {
   }
 };
 
-const createAreaSensor = async (req, res) => {
+const  createAreaSensor = async (req, res) => {
   const error = createSchema.validate(req.body).error;
   if (error) return res.status(400).json(error);
   const { name } = req.body;
