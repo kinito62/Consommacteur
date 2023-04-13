@@ -26,7 +26,7 @@ export default class Contacts extends React.Component {
             <div className="titleForm">
                 <a>Formulaire de contact</a>
                 </div>
-                <form className="inscriptionForm" onSubmit={event => this.handleSubmit(event)}>
+                <form className="inscriptionForm" onSubmit={event => this.handleSubmit(event)} method='GET'>
                     <div className="row">
                         <div className="col-25">
                             <label for="lastName">Nom </label>
@@ -64,7 +64,7 @@ export default class Contacts extends React.Component {
                             <label for="message">Corps du message </label>
                         </div>
                         <div className="col-75">
-                            <textarea id="message" name="message" type="text" placeholder="Bonjour, je vous contacte car...." required ref={this.message}></textarea>
+                            <textarea id="message" type="text" placeholder="Bonjour, je vous contacte car...." ref={this.message}></textarea>
                         </div>
                     </div>
                     
