@@ -1,7 +1,8 @@
-import User from "./User.js";
+import User from "./user.js";
 import House from "./house.js";
 import Area from "./area.js";
 import Sensor from "./sensor.js";
+import Measurement from "./measurement.js";
 
 User.hasMany(House, {
   as: 'houses',
@@ -52,4 +53,16 @@ Sensor.belongsTo(Area, {
   onDelete: "CASCADE",
 });
 
-export { User, House, Area };
+Sensor.hasMany(Measurement, {
+  as: 'measurements',
+  foreignKey: 'sensorId',
+  onDelete: 'CASCADE',
+})
+
+Measurement.belongsTo(Sensor, {
+  as: 'sensor',
+  foreignKey: 'sensorId',
+  onDelete: 'CASCADE',
+})
+
+export { User, House, Area, Sensor, Measurement };

@@ -1,33 +1,62 @@
 import { Area } from "../model/index.js";
 import { createSchema } from "../validations/areaValidation.js";
 
-const getHouseArea = async (req, res) => {
+const getArea = async (req, res) => {
+  const area = req.area;
+
   try {
-    const area = await Area.findOne({ where: { houseId: req.house.id, id: req.params.areaId } });
-    if (area) {
-      res.status(200).send(area);
-    } else {
-      res.status(404).send('Area not found');
-    }
+    res.status(200).json(area);
   } catch (error) {
     console.log(error);
-    res.status(500).send();
+    res.status(500).json({ error: "Unable to update area." });
+  }
+};
+
+const updateArea = async (req, res) => {
+  const error = createSchema.validate(req.body).error;
+  if (error) return res.status(400).json({ error: error });
+
+  const area = req.area;
+  const { name } = req.body;
+
+  try {
+    area.name = name;
+
+    await area.save();
+
+    res.status(200).json(area);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Unable to update area." });
+  }
+};
+
+const deleteArea = async (req, res) => {
+  const area = req.area;
+
+  try {
+    await area.destroy();
+
+    res.status(200).json({ message: "Area deleted." });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Unable to delete area." });
   }
 };
 
 const getHouseAreas = async (req, res) => {
   try {
-    const areas = await Area.findAll({ where: { houseId: req.house.id } });
-    res.status(200).send(areas);
+    const areas = await Area.findAll({ where: { houseId: req.house.id, parentAreaId: null } });
+    res.status(200).json(areas);
   } catch (error) {
     console.log(error);
-    res.status(500).send();
+    res.status(500).json({error: 'Unable to get house areas.'});
   }
 };
 
 const createHouseArea = async (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).send(error);
+  if (error) return res.status(400).json(error);
 
   const { name } = req.body;
   const area = new Area({
@@ -35,66 +64,52 @@ const createHouseArea = async (req, res) => {
     houseId: req.house.id,
   });
 
-  const existingArea = await Area.findOne({
-    where: { houseId: req.house.id, name: name },
-  });
-  if (existingArea) {
-    return res.status(400).json({ message: "This area already exist" });
-  }
-
   const savedArea = await area.save();
 
   res.json(savedArea);
 };
 
-const updateHouseArea = async (req, res) => {
-  const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).send(error);
-  const { name } = req.body;
+const getSubAreas = async (req, res) => {
+  const parentAreaId = req.area.id;
 
   try {
-    const area = await Area.findOne({
-      where: { houseId: req.house.id, id: req.params.areaId },
+    const subAreas = await Area.findAll({
+      where: { parentAreaId },
     });
-    if (area) {
-      area.name = name;
 
-      await area.save();
-
-      res.status(200).send(area);
-    } else {
-      res.status(404).send("Area not found");
-    }
+    return res.status(201).json(subAreas);
   } catch (error) {
     console.log(error);
-    res.status(500).send();
+    return res.status(500).json({ error: "Could not get sub-areas." });
   }
 };
 
-const deleteHouseArea = (req, res) => {
-  Area.destroy({
-    where: {
-      id: req.params.areaId,
-      houseId: req.house.id,
-    },
-  })
-    .then((deletedArea) => {
-      if (deletedArea === 1) {
-        res.status(200).json({ message: "Area deleted successfully" });
-      } else {
-        res.status(404).json({ message: "Area not found" });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json(error);
+const createSubArea = async (req, res) => {
+  const { name } = req.body;
+  const parentAreaId = req.area.id;
+  const houseId = req.area.houseId;
+
+  try {
+    // Create the new sub-area
+    const subArea = await Area.create({
+      name,
+      parentAreaId,
+      houseId,
     });
+
+    return res.status(201).json({ subArea });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Could not create sub-area." });
+  }
 };
 
 export {
-  getHouseArea,
+  getArea,
+  updateArea,
+  deleteArea,
   getHouseAreas,
   createHouseArea,
-  updateHouseArea,
-  deleteHouseArea,
+  getSubAreas,
+  createSubArea,
 };

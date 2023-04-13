@@ -23,10 +23,10 @@ const register = async (req, res) => {
     password: hashedPassword,
   });
 
-  const validationError = await user.validate().catch(err => {return err});
-  if (validationError instanceof ValidationError) {
-    res.status(400).send(validationError);
-    console.log(validationError);
+  const error = await user.validate().catch(err => {return err});
+  if (error instanceof error) {
+    res.status(400).json(error);
+    console.log(error);
   } else {
     await user.save();
 

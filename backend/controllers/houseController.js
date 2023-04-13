@@ -1,4 +1,3 @@
-import { ValidationError } from "sequelize";
 import { House } from "../model/index.js";
 import { createSchema } from "../validations/houseValidation.js";
 
@@ -7,24 +6,24 @@ const getHouse = async (req, res) => {
     where: { userId: req.user.id, id: req.params.houseId },
   });
   if (house) {
-    res.send(house);
+    res.status(200).json(house);
   } else {
-    res.status(404).send({ message: "House not found." });
+    res.status(404).json({ message: "House not found." });
   }
 };
 
 const getHouses = async (req, res) => {
-  const house = await House.findAll({ where: { userId: req.user.id } });
-  if (house) {
-    res.send(house);
+  const houses = await House.findAll({ where: { userId: req.user.id } });
+  if (houses) {
+    res.status(200).json(houses);
   } else {
-    res.status(404).send({ message: "House not found." });
+    res.status(404).json({ message: "House not found." });
   }
 };
 
 const createHouse = async (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).send(error);
+  if (error) return res.status(400).json(error);
 
   const { name } = req.body;
   const house = new House({
@@ -46,40 +45,46 @@ const createHouse = async (req, res) => {
 
 const updateHouse = async (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).send(error);
+  if (error) return res.status(400).json(error);
 
   const { name } = req.body;
-  const updatedHouse = await House.findOne({
-    where: { userId: req.user.id, id: req.params.houseId },
-  });
-  if (!updatedHouse) {
-    return res.status(404).json({ message: "This house doesn't exist" });
-  }
+  const house = req.house;
 
-  updatedHouse.name = name;
+  house.name = name;
 
-  await updatedHouse.save();
+  await house.save();
 
-  res.status(200).json(updatedHouse);
+  res.status(200).json(house);
 };
 
-const deleteHouse = (req, res) => {
-  House.destroy({
-    where: {
-        userId: req.user.id,
-        id: req.params.houseId,
-      },
-    })
-    .then((deletedHouse) => {
-      if (deletedHouse === 1) {
-        res.status(200).json({ message: "House deleted successfully" });
-      } else {
-        res.status(404).json({ message: "House not found" });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json(error);
-    });
+const deleteHouse = async (req, res) => {
+  try {
+    const house = req.house;
+
+    await house.destroy();
+
+    res.status(200).json({ error: "House deleted." });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Unable to delete house." });
+  }
+
+  // House.destroy({
+  //   where: {
+  //       userId: req.user.id,
+  //       id: req.params.houseId,
+  //     },
+  //   })
+  //   .then((deletedHouse) => {
+  //     if (deletedHouse === 1) {
+  //       res.status(200).json({ message: "House deleted successfully" });
+  //     } else {
+  //       res.status(404).json({ message: "House not found" });
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     res.status(500).json(error);
+  //   });
 };
 
 export { getHouse, getHouses, createHouse, updateHouse, deleteHouse };

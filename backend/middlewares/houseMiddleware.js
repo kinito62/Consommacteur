@@ -2,8 +2,11 @@ import { House } from "../model/index.js";
 
 const getHouseById = async (req, res, next) => {
     try {
-        const house = await House.findOne({where: {id: req.params.houseId, userId: req.user.id}});
-        if (!house) return res.status(404).send({ message: "House not found." });
+        const houseId = req.params.houseId;
+        const userId = req.user.id;
+
+        const house = await House.findOne({where: {id: houseId, userId: userId}});
+        if (!house) return res.status(404).json({ message: "House not found." });
 
         req.house = house;
 
@@ -11,7 +14,7 @@ const getHouseById = async (req, res, next) => {
     } catch (err) {
         console.log(err);
 
-        res.status(500).send();
+        res.status(500).json({message: 'Could not get house.'});
     }
     
 };

@@ -1,11 +1,10 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
-import House from "./house.js";
 
 const User = sequelize.define("user", {
   email: {
     type: DataTypes.STRING,
-    unique: true,
+    indexes: [{ unique: true, fields: ["email"] }],
     allowNull: false,
   },
   firstName: {
