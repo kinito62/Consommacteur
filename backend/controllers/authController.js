@@ -79,7 +79,9 @@ const requireAuth = async (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
     // Récupération de l'utilisateur depuis la base de données
-    const user = await User.findByPk(decodedToken.id);
+    const user = await User.findByPk(decodedToken.id, {
+      attributes: { exclude: ["password"] },
+    });
 
     // Vérification que l'utilisateur existe
     if (!user) {

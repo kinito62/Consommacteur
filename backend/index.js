@@ -8,6 +8,7 @@ import { requireAuth } from "./controllers/authController.js";
 import houseRoutes from "./routes/houseRoutes.js";
 import subAreaRoutes from "./routes/areaRoutes.js";
 import sensorRoutes from "./routes/sensorRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 app.use(cors());
@@ -29,6 +30,8 @@ app.get("/secured", requireAuth, (req, res) => {
 });
 
 app.use("/auth", authRoutes);
+
+app.use("/user", requireAuth, userRoutes);
 
 app.use("/houses", requireAuth, houseRoutes);
 
