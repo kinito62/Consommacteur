@@ -4,7 +4,7 @@ import { createSchema } from "../validations/measurementValidation.js";
 const createSensorMeasurement = async (req, res) => {
   try {
     const error = createSchema.validate(req.body).error;
-    if (error) return res.status(400).json(error);
+    if (error) return res.status(400).json({error});
 
     const sensorId = req.sensor.id;
     const { value, type, unit } = req.body;

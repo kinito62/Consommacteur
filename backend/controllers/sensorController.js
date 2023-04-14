@@ -5,7 +5,7 @@ const getSensor = (req, res) => {
   const sensor = req.sensor;
 
   try {
-    res.status(200).json({ sensor });
+    res.status(200).json(sensor);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get sensor." });
@@ -14,14 +14,14 @@ const getSensor = (req, res) => {
 
 const updateSensor = (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).json(error);
+  if (error) return res.status(400).json({error});
 
   const sensor = req.sensor;
   const { name } = req.body;
 
   try {
     sensor.name = name;
-    res.status(200).json({ sensor });
+    res.status(200).json(sensor);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get sensor." });
@@ -60,7 +60,7 @@ const getAreaSensors = async (req, res) => {
 
 const  createAreaSensor = async (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).json(error);
+  if (error) return res.status(400).json({error});
   const { name } = req.body;
   const areaId = req.area.id;
 
@@ -71,7 +71,7 @@ const  createAreaSensor = async (req, res) => {
       areaId,
     });
 
-    return res.status(201).json({ sensor });
+    return res.status(201).json(sensor);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Could not create sensor." });

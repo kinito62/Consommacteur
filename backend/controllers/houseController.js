@@ -8,7 +8,7 @@ const getHouse = async (req, res) => {
   if (house) {
     res.status(200).json(house);
   } else {
-    res.status(404).json({ message: "House not found." });
+    res.status(404).json({ error: "House not found." });
   }
 };
 
@@ -17,7 +17,7 @@ const getHouses = async (req, res) => {
   if (houses) {
     res.status(200).json(houses);
   } else {
-    res.status(404).json({ message: "House not found." });
+    res.status(404).json({ error: "House not found." });
   }
 };
 
@@ -35,7 +35,7 @@ const createHouse = async (req, res) => {
     where: { userId: req.user.id, name: name },
   });
   if (existingHouse) {
-    return res.status(400).json({ message: "This house already exist" });
+    return res.status(400).json({ error: "This house already exist" });
   }
 
   const savedHouse = await house.save();
@@ -45,7 +45,7 @@ const createHouse = async (req, res) => {
 
 const updateHouse = async (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).json(error);
+  if (error) return res.status(400).json({error});
 
   const { name } = req.body;
   const house = req.house;
@@ -68,23 +68,6 @@ const deleteHouse = async (req, res) => {
     console.log(error);
     res.status(500).json({ error: "Unable to delete house." });
   }
-
-  // House.destroy({
-  //   where: {
-  //       userId: req.user.id,
-  //       id: req.params.houseId,
-  //     },
-  //   })
-  //   .then((deletedHouse) => {
-  //     if (deletedHouse === 1) {
-  //       res.status(200).json({ message: "House deleted successfully" });
-  //     } else {
-  //       res.status(404).json({ message: "House not found" });
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     res.status(500).json(error);
-  //   });
 };
 
 export { getHouse, getHouses, createHouse, updateHouse, deleteHouse };

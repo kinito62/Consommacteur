@@ -25,7 +25,7 @@ const register = async (req, res) => {
 
   const error = await user.validate().catch(err => {return err});
   if (error instanceof ValidationError) {
-    res.status(400).json(error);
+    res.status(400).json({error});
     console.log(error);
   } else {
     await user.save();
@@ -44,7 +44,7 @@ const login = async (req, res) => {
   if (!user) {
     return res
       .status(401)
-      .json({ message: "Nom d'utilisateur ou mot de passe incorrect" });
+      .json({ error: "Nom d'utilisateur ou mot de passe incorrect" });
   }
 
   // Vérification du mot de passe
@@ -52,7 +52,7 @@ const login = async (req, res) => {
   if (!passwordMatch) {
     return res
       .status(401)
-      .json({ message: "Nom d'utilisateur ou mot de passe incorrect" });
+      .error({ message: "Nom d'utilisateur ou mot de passe incorrect" });
   }
 
   // Génération d'un token JWT pour l'utilisateur
@@ -71,7 +71,7 @@ const requireAuth = async (req, res, next) => {
   if (!token) {
     return res
       .status(401)
-      .json({ message: "Token d'authentification manquant" });
+      .json({ error: "Token d'authentification manquant" });
   }
 
   try {
@@ -85,7 +85,7 @@ const requireAuth = async (req, res, next) => {
 
     // Vérification que l'utilisateur existe
     if (!user) {
-      return res.status(401).json({ message: "Utilisateur non trouvé" });
+      return res.status(401).json({ error: "Utilisateur non trouvé" });
     }
 
     // Ajout de l'utilisateur à la requête pour utilisation dans les routes suivantes
@@ -97,7 +97,7 @@ const requireAuth = async (req, res, next) => {
     // Erreur si le token est invalide
     return res
       .status(401)
-      .json({ message: "Token d'authentification invalide" });
+      .json({ error: "Token d'authentification invalide" });
   }
 };
 

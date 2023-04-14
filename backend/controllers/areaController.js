@@ -56,7 +56,7 @@ const getHouseAreas = async (req, res) => {
 
 const createHouseArea = async (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).json(error);
+  if (error) return res.status(400).json({error});
 
   const { name } = req.body;
   const area = new Area({

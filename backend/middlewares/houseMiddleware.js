@@ -6,7 +6,7 @@ const getHouseById = async (req, res, next) => {
         const userId = req.user.id;
 
         const house = await House.findOne({where: {id: houseId, userId: userId}});
-        if (!house) return res.status(404).json({ message: "House not found." });
+        if (!house) return res.status(404).json({ error: "House not found." });
 
         req.house = house;
 
@@ -14,7 +14,7 @@ const getHouseById = async (req, res, next) => {
     } catch (err) {
         console.log(err);
 
-        res.status(500).json({message: 'Could not get house.'});
+        res.status(500).json({error: 'Could not get house.'});
     }
     
 };
