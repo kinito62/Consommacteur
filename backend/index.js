@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import cors from 'cors';
 import { sequelize, connectToDb } from "./db.js";
 import authRoutes from "./routes/authRoutes.js";
 import { requireAuth } from "./controllers/authController.js";
@@ -9,6 +10,7 @@ import subAreaRoutes from "./routes/areaRoutes.js";
 import sensorRoutes from "./routes/sensorRoutes.js";
 
 const app = express();
+app.use(cors());
 
 await connectToDb();
 await sequelize.sync({
