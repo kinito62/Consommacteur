@@ -73,17 +73,28 @@
     resize: vertical;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     .lastName, .firstName, .email, .password, .confirmPassword, .connexion, .inscription, input[type=submit] {
       width: 100%;
       margin-top: 0;
+      padding: 1rem;
+      
     }
 
   }
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 900px) {
     .layoutForm{
         max-width: 60%;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 1rem;
+        min-width: 800px;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .layoutForm{
+        max-width: 100%;
         margin-right: auto;
         margin-left: auto;
         padding: 1rem;

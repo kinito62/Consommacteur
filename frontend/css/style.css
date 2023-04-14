@@ -24,14 +24,23 @@ body {
  
 }
 
-.container {
-  max-width: 90%;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 1rem;
-  
+@media screen and (min-width: 700px) {
+  .container {
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1rem;
+  }
 }
 
+@media screen and (max-width: 700px) {
+  .container {
+    max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1rem;
+  }
+}
 
 .copy-right-sec{
     padding: 1.8rem;
@@ -50,5 +59,4 @@ footer{
   bottom: 0; 
   left: 0; 
   right: 0;
-  /* Reste du CSS... */
 }
