@@ -4,7 +4,7 @@ import { createSchema } from "../validations/scenarioValidation.js";
 const createScenario = async (req, res) => {
   try {
     const error = createSchema.validate(req.body).error;
-    if (error) res.status(400).json(error);
+    if (error) return res.status(400).json(error);
 
     const { name } = req.body;
     const userId = req.user.id;
@@ -24,7 +24,7 @@ const createScenario = async (req, res) => {
 const updateScenario = async (req, res) => {
   try {
     const error = createSchema.validate(req.body).error;
-    if (error) res.status(400).json(error);
+    if (error) return res.status(400).json(error);
 
     const { name } = req.body;
     const scenario = req.scenario;

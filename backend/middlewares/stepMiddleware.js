@@ -2,7 +2,7 @@ import { Scenario, ScenarioStep, User } from "../model/index.js";
 
 const getStepById = async (req, res, next) => {
   try {
-    const stepId = req.params.sepId;
+    const stepId = req.params.stepId;
     const userId = req.user.id;
 
     const step = await ScenarioStep.findOne({
