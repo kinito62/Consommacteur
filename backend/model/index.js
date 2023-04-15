@@ -3,6 +3,8 @@ import House from "./house.js";
 import Area from "./area.js";
 import Sensor from "./sensor.js";
 import Measurement from "./measurement.js";
+import Scenario from "./scenario.js";
+import ScenarioStep from "./scenarioStep.js";
 
 User.hasMany(House, {
   as: 'houses',
@@ -65,4 +67,33 @@ Measurement.belongsTo(Sensor, {
   onDelete: 'CASCADE',
 })
 
-export { User, House, Area, Sensor, Measurement };
+User.hasMany(Scenario, {
+  as: 'scenarios',
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+})
+
+Scenario.belongsTo(User, {
+  as: 'user',
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+})
+
+Scenario.hasMany(ScenarioStep, {
+  as: 'steps',
+  foreignKey: 'scenarioId',
+  onDelete: 'CASCADE',
+})
+
+ScenarioStep.belongsTo(Scenario, {
+  as: 'scenario',
+  foreignKey: 'scenarioId',
+  onDelete: 'CASCADE',
+})
+
+ScenarioStep.belongsTo(Sensor, {
+  as: 'sensor',
+  foreignKey: 'sensorId',
+})
+
+export { User, House, Area, Sensor, Measurement, Scenario, ScenarioStep };
