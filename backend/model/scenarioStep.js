@@ -15,6 +15,7 @@ const ScenarioStep = sequelize.define("ScenarioStep", {
   value: {
     type: DataTypes.FLOAT,
     allowNull: false,
+    defaultValue: 0,
   },
   type: {
     type: DataTypes.STRING,

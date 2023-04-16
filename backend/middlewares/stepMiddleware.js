@@ -24,7 +24,7 @@ const getStepById = async (req, res, next) => {
     if (step) {
       req.step = step;
     } else {
-      req.status(404).json({ error: "Step not found." });
+      return res.status(404).json({ error: "Step not found." });
     }
 
     next();

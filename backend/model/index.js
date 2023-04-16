@@ -96,4 +96,14 @@ ScenarioStep.belongsTo(Sensor, {
   foreignKey: 'sensorId',
 })
 
+ScenarioStep.hasOne(ScenarioStep, {
+  as: 'nextStep',
+  onDelete: 'NO ACTION',
+})
+
+ScenarioStep.hasOne(ScenarioStep, {
+  as: 'previousStep',
+  onDelete: 'NO ACTION',
+})
+
 export { User, House, Area, Sensor, Measurement, Scenario, ScenarioStep };

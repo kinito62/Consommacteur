@@ -17,7 +17,7 @@ const getHouses = async (req, res) => {
   if (houses) {
     res.status(200).json(houses);
   } else {
-    res.status(404).json({ error: "House not found." });
+    return res.status(404).json({ error: "House not found." });
   }
 };
 

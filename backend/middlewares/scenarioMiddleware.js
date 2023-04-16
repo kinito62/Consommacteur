@@ -14,7 +14,7 @@ const getScenarioById = async (req, res, next) => {
     if (scenario) {
       req.scenario = scenario;
     } else {
-      res.status(404).json({ error: "Scenario not found." });
+      return res.status(404).json({ error: "Scenario not found." });
     }
     next();
   } catch (error) {

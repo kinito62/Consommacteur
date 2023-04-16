@@ -12,6 +12,7 @@ import sensorRoutes from "./routes/sensorRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import scenarioRoutes from "./routes/scenarioRoutes.js";
 import stepRoutes from "./routes/stepRoutes.js";
+import { scenariosExecution } from "./cron/scenario.js";
 
 const app = express();
 app.use(cors());
@@ -25,7 +26,8 @@ await sequelize.sync({
 app.use(express.json());
 
 cron.schedule("* * * * *", () => {
-  console.log("running a task every minute");
+  console.log("cron...");
+  scenariosExecution();
 });
 
 app.get("/", (req, res) => {
