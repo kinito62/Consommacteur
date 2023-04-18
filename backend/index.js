@@ -20,12 +20,12 @@ app.use(cors());
 await connectToDb();
 await sequelize.sync({
   // force: true,
-  alter: true,
+  // alter: true,
 });
 
 app.use(express.json());
 
-cron.schedule("* * * * *", () => {
+cron.schedule("*/10 * * * * *", () => {
   console.log("cron...");
   scenariosExecution();
 });

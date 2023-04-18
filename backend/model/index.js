@@ -96,13 +96,15 @@ ScenarioStep.belongsTo(Sensor, {
   foreignKey: 'sensorId',
 })
 
-ScenarioStep.hasOne(ScenarioStep, {
+ScenarioStep.belongsTo(ScenarioStep, {
   as: 'nextStep',
+  foreignKey: 'nextStepId',
   onDelete: 'NO ACTION',
 })
 
-ScenarioStep.hasOne(ScenarioStep, {
+ScenarioStep.belongsTo(ScenarioStep, {
   as: 'previousStep',
+  foreignKey: 'previousStepId',
   onDelete: 'NO ACTION',
 })
 

@@ -1,5 +1,6 @@
 import { Scenario } from "../model/index.js";
 import { createSchema } from "../validations/scenarioValidation.js";
+import * as scenarioService from "../services/scenarioService.js";
 
 const createScenario = async (req, res) => {
   try {
@@ -79,10 +80,43 @@ const getScenarios = async (req, res) => {
   }
 };
 
+const startScenario = async (req, res) => {
+  try {
+    await scenarioService.startScenario(req.scenario);
+    res.status(200).json({ message: "Scenario started." });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Unable to start scenario." });
+  }
+};
+
+const pauseScenario = async (req, res) => {
+  try {
+    await scenarioService.pauseScenario(req.scenario);
+    res.status(200).json({ message: "Scenario paused." });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Unable to pause scenario." });
+  }
+};
+
+const stopScenario = async (req, res) => {
+  try {
+    await scenarioService.stopScenario(req.scenario);
+    res.status(200).json({ message: "Scenario stop." });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Unable to stop scenario." });
+  }
+};
+
 export {
   createScenario,
   updateScenario,
   deleteScenario,
   getScenario,
   getScenarios,
+  startScenario,
+  pauseScenario,
+  stopScenario,
 };
