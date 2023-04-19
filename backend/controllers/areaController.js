@@ -5,7 +5,7 @@ const getArea = async (req, res) => {
   const area = req.area;
 
   try {
-    res.status(200).json(area);
+    res.status(200).json({area});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to update area." });
@@ -24,7 +24,7 @@ const updateArea = async (req, res) => {
 
     await area.save();
 
-    res.status(200).json(area);
+    res.status(200).json({area});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to update area." });
@@ -47,7 +47,7 @@ const deleteArea = async (req, res) => {
 const getHouseAreas = async (req, res) => {
   try {
     const areas = await Area.findAll({ where: { houseId: req.house.id, parentAreaId: null } });
-    res.status(200).json(areas);
+    res.status(200).json({areas});
   } catch (error) {
     console.log(error);
     res.status(500).json({error: 'Unable to get house areas.'});
@@ -64,20 +64,20 @@ const createHouseArea = async (req, res) => {
     houseId: req.house.id,
   });
 
-  const savedArea = await area.save();
+  await area.save();
 
-  res.json(savedArea);
+  res.json({area});
 };
 
 const getSubAreas = async (req, res) => {
   const parentAreaId = req.area.id;
 
   try {
-    const subAreas = await Area.findAll({
+    const areas = await Area.findAll({
       where: { parentAreaId },
     });
 
-    return res.status(201).json(subAreas);
+    return res.status(201).json({areas});
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Could not get sub-areas." });
@@ -91,13 +91,13 @@ const createSubArea = async (req, res) => {
 
   try {
     // Create the new sub-area
-    const subArea = await Area.create({
+    const areas = await Area.create({
       name,
       parentAreaId,
       houseId,
     });
 
-    return res.status(201).json({ subArea });
+    return res.status(201).json({ areas });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Could not create sub-area." });

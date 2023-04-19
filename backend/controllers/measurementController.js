@@ -16,7 +16,7 @@ const createSensorMeasurement = async (req, res) => {
       sensorId,
     });
 
-    res.status(200).json(measurement);
+    res.status(200).json({measurement});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Could not create sensor measurement." });
@@ -33,7 +33,7 @@ const getSensorMeasurements = async (req, res) => {
       },
     });
 
-    res.status(200).json(measurements);
+    res.status(200).json({measurements});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Could not find sensor measurements." });

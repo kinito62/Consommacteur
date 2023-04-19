@@ -12,7 +12,7 @@ const updateStep = async (req, res) => {
 
     await step.save();
 
-    res.status(200).json(step);
+    res.status(200).json({step});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to update scenario step." });
@@ -48,7 +48,8 @@ const deleteStep = async (req, res) => {
 
 const getStep = (req, res) => {
   try {
-    res.status(200).json(req.step);
+    const step = req.step;
+    res.status(200).json({step});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get scenario step." });
@@ -82,7 +83,7 @@ const createScenarioStep = async (req, res) => {
       await lastStep.save();
     }
 
-    res.status(200).json(step);
+    res.status(200).json({step});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to create scenario step." });
@@ -99,7 +100,7 @@ const getScenarioSteps = async (req, res) => {
       },
     });
 
-    res.status(200).json(steps);
+    res.status(200).json({steps});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get scenario steps." });

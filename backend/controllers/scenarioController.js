@@ -15,7 +15,7 @@ const createScenario = async (req, res) => {
       userId,
     });
 
-    res.status(200).json(scenario);
+    res.status(200).json({scenario});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to create scenario." });
@@ -25,7 +25,7 @@ const createScenario = async (req, res) => {
 const updateScenario = async (req, res) => {
   try {
     const error = createSchema.validate(req.body).error;
-    if (error) return res.status(400).json(error);
+    if (error) return res.status(400).json({error});
 
     const { name } = req.body;
     const scenario = req.scenario;
@@ -34,7 +34,7 @@ const updateScenario = async (req, res) => {
 
     await scenario.save();
 
-    res.status(200).json(scenario);
+    res.status(200).json({scenario});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to update scenario." });
@@ -57,7 +57,7 @@ const deleteScenario = async (req, res) => {
 const getScenario = (req, res) => {
   try {
     const scenario = req.scenario;
-    res.status(200).json(scenario);
+    res.status(200).json({scenario});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get scenario." });
@@ -73,7 +73,7 @@ const getScenarios = async (req, res) => {
       },
     });
 
-    res.status(200).json(scenarios);
+    res.status(200).json({scenarios});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get scenarios." });

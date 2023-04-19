@@ -5,7 +5,7 @@ const getSensor = (req, res) => {
   const sensor = req.sensor;
 
   try {
-    res.status(200).json(sensor);
+    res.status(200).json({sensor});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get sensor." });
@@ -21,7 +21,7 @@ const updateSensor = (req, res) => {
 
   try {
     sensor.name = name;
-    res.status(200).json(sensor);
+    res.status(200).json({sensor});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to get sensor." });
@@ -51,7 +51,7 @@ const getAreaSensors = async (req, res) => {
       },
     });
 
-    return res.status(200).json(sensors);
+    return res.status(200).json({sensors});
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Could not get sensors." });
@@ -71,7 +71,7 @@ const  createAreaSensor = async (req, res) => {
       areaId,
     });
 
-    return res.status(201).json(sensor);
+    return res.status(201).json({sensor});
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Could not create sensor." });

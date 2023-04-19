@@ -6,7 +6,7 @@ const getHouse = async (req, res) => {
     where: { userId: req.user.id, id: req.params.houseId },
   });
   if (house) {
-    res.status(200).json(house);
+    res.status(200).json({house});
   } else {
     res.status(404).json({ error: "House not found." });
   }
@@ -15,7 +15,7 @@ const getHouse = async (req, res) => {
 const getHouses = async (req, res) => {
   const houses = await House.findAll({ where: { userId: req.user.id } });
   if (houses) {
-    res.status(200).json(houses);
+    res.status(200).json({houses});
   } else {
     return res.status(404).json({ error: "House not found." });
   }
@@ -23,7 +23,7 @@ const getHouses = async (req, res) => {
 
 const createHouse = async (req, res) => {
   const error = createSchema.validate(req.body).error;
-  if (error) return res.status(400).json(error);
+  if (error) return res.status(400).json({error});
 
   const { name } = req.body;
   const house = new House({
@@ -38,9 +38,9 @@ const createHouse = async (req, res) => {
     return res.status(400).json({ error: "This house already exist" });
   }
 
-  const savedHouse = await house.save();
+  await house.save();
 
-  res.json(savedHouse);
+  res.json({house});
 };
 
 const updateHouse = async (req, res) => {
@@ -54,7 +54,7 @@ const updateHouse = async (req, res) => {
 
   await house.save();
 
-  res.status(200).json(house);
+  res.status(200).json({house});
 };
 
 const deleteHouse = async (req, res) => {
