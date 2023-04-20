@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 
 import '../css/header.css'
 
+import { accountService } from "./services/account.service";
+
 export default function Menu() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
 
@@ -48,24 +50,38 @@ export default function Menu() {
           <li>
             <NavLink to={"/"}>Acceuil</NavLink>
           </li>
+         
+          {accountService.isLogged() && <>
           <li>
-            <NavLink to="/dashboard">Tableau de bord</NavLink>
+            <NavLink to="/conn/dashboard">Tableau de bord</NavLink>
           </li>
           <li>
-            <NavLink to="/places">Mes places</NavLink>
+            <NavLink to="/conn/places">Mes places</NavLink>
           </li>
+          <li>
+            <NavLink to="/conn/suggestions">Mes suggestions</NavLink>
+          </li>
+          </>}
+          
+          
 		  <li>
             <NavLink to="/offers">Nos offres</NavLink>
           </li>
-		  <li>
-            <NavLink to="/suggestions">Mes suggestions</NavLink>
-          </li>
+          
+		  
 		  <li>
             <NavLink to="/contact">Nous contacter</NavLink>
           </li>
+          
 		  <li>
+      {accountService.isLogged() ? 
+            <NavLink to="/conn/profile">Espace Membre</NavLink>
+          :
             <NavLink to="/connexion">Espace Membre</NavLink>
-          </li>
+
+        }
+        </li>
+
         </ul>
       </div>
     </nav>

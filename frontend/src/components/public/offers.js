@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import offers from '../../data/components/offers.json'
-import '../../css/offers.css'
+import offers from '../../../data/components/offers.json'
+import '../../../css/offers.css'
 export default class Offers extends React.Component {
 
    

@@ -29,7 +29,7 @@ export default class Contacts extends React.Component {
                 <form className="inscriptionForm" onSubmit={event => this.handleSubmit(event)} method='GET'>
                     <div className="row">
                         <div className="col-25">
-                            <label for="lastName">Nom </label>
+                            <label htmlFor="lastName">Nom </label>
                         </div> 
                         <div className="col-75">
                             <input required type="text" id="lastName" ref={this.LastName} />
@@ -37,7 +37,7 @@ export default class Contacts extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-25">
-                            <label for="firstName">Prénom </label>
+                            <label htmlFor="firstName">Prénom </label>
                         </div>
                         <div className="col-75">
                             <input required type="text" id="firstName" ref={this.firstName} />
@@ -45,7 +45,7 @@ export default class Contacts extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-25">
-                            <label for="email">Email </label>
+                            <label htmlFor="email">Email </label>
                         </div>
                         <div className="col-75">
                             <input required type="email" id="email" ref={this.email} />
@@ -53,7 +53,7 @@ export default class Contacts extends React.Component {
                     </div>
                     <div className="row">   
                         <div className="col-25">
-                            <label for="object">Objet du message </label>
+                            <label htmlFor="object">Objet du message </label>
                         </div>
                         <div className="col-75">
                             <input required type="text" id="object" ref={this.object} />
@@ -61,7 +61,7 @@ export default class Contacts extends React.Component {
                     </div>
                     <div className="row">
                         <div className="col-25">
-                            <label for="message">Corps du message </label>
+                            <label htmlFor="message">Corps du message </label>
                         </div>
                         <div className="col-75">
                             <textarea id="message" type="text" placeholder="Bonjour, je vous contacte car...." ref={this.message}></textarea>

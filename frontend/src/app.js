@@ -2,15 +2,13 @@ import { createRoot } from 'react-dom/client';
 import Menu from './menu';
 import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import Home from './components/home';
-import Dashboard from './components/dashbooard';
-import Places from './components/places';
-import Offers from './components/offers';
-import Suggestions from './components/suggestions';
-import Contacts from './components/contacts';
-import Connexion from './components/Auth/connexion';
-import Inscription from './components/Auth/inscription';
-import Profile from './components/Auth/profile';
+import Home from './components/public/home';
+import Offers from './components/public/offers';
+import Contacts from './components/public/contacts';
+import Connexion from './components/public/connexion';
+import Inscription from './components/public/inscription';
+import AuthGard from './_helpers/AuthGuard';
+import PrivateRouter from './components/private/privateRouter';
 
 
 const root = createRoot(document.querySelector('.appContainer'));
@@ -21,14 +19,19 @@ root.render(
 			<Routes>
 				<Route path="/" element={<Home/>} />
 
-				<Route path="/dashboard" element={<Dashboard/>} />
-				<Route path="/places" element={<Places/>} />
+				<Route path="/conn/*" element={
+					<AuthGard>
+						<PrivateRouter/>
+					</AuthGard>
+				}/>
+
 				<Route path="/offers" element={<Offers/>} />
-				<Route path="/suggestions" element={<Suggestions/>} />
 				<Route path="/contact" element={<Contacts/>} />
+
 				<Route path="/connexion" element={<Connexion/>} />
+
 				<Route path="/inscription" element={<Inscription/>} />
-				<Route path='/profile' element={<Profile/>} />
+				
 			</Routes>
 		</BrowserRouter>
 </>

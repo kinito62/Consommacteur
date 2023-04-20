@@ -38,7 +38,6 @@ export default class inscription extends React.Component {
 		fetch('http://localhost:3000/auth/register', requestOptions)
 			.then(response => response.json())
             .then(data => {
-                console.log(data);
 				if (
 					data &&
 					data.emailInput &&
@@ -144,3 +143,4 @@ export default class inscription extends React.Component {
 		);
 	}
 }
+25
