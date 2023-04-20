@@ -1,15 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { accountService } from '../../services/account.service';
+import { useRecoilState } from 'recoil';
+import { loginState } from '../atoms/login';
 
 export default function Connexion() {
   const navigate = useNavigate();
   const emailInput = useRef();
   const passwordInput = useRef();
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
 
+  const [b, setN] = useRecoilState(loginState);
+
+ 
+  
   function handleSubmit(event) {
     event.preventDefault();
     const requestOptions = {
@@ -25,9 +29,8 @@ export default function Connexion() {
       .then(response => response.json())
       .then(data => {
         accountService.saveToken(data.token)
+        setN(true);
         navigate('/conn/profile')
-        
-        
       });
   }
 

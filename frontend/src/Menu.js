@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 
 import '../css/header.css'
 
-import { accountService } from "./services/account.service";
+import { useRecoilValue } from "recoil";
+import { loginState } from "./components/atoms/login";
 
 export default function Menu() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
-
+  const StateLogin= useRecoilValue(loginState)
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
@@ -51,7 +52,7 @@ export default function Menu() {
             <NavLink to={"/"}>Acceuil</NavLink>
           </li>
          
-          {accountService.isLogged() && <>
+          {StateLogin && <>
           <li>
             <NavLink to="/conn/dashboard">Tableau de bord</NavLink>
           </li>
@@ -60,8 +61,8 @@ export default function Menu() {
           </li>
           <li>
             <NavLink to="/conn/suggestions">Mes suggestions</NavLink>
-          </li>
-          </>}
+        </li>
+</>}
           
           
 		  <li>
@@ -74,10 +75,11 @@ export default function Menu() {
           </li>
           
 		  <li>
-      {accountService.isLogged() ? 
+      {StateLogin ? <>
             <NavLink to="/conn/profile">Espace Membre</NavLink>
+            </>
           :
-            <NavLink to="/connexion">Espace Membre</NavLink>
+          <><NavLink to="/connexion">Espace Membre</NavLink></>
 
         }
         </li>

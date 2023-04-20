@@ -9,30 +9,31 @@ import Connexion from './components/public/connexion';
 import Inscription from './components/public/inscription';
 import AuthGard from './_helpers/AuthGuard';
 import PrivateRouter from './components/private/privateRouter';
-
-
+import {RecoilRoot} from 'recoil'
 const root = createRoot(document.querySelector('.appContainer'));
 root.render(
 	<>
-		<BrowserRouter>
-			<Menu/>
-			<Routes>
-				<Route path="/" element={<Home/>} />
+		<RecoilRoot>
+			<BrowserRouter>
+				<Menu/>
+				<Routes>
+					<Route path="/" element={<Home/>} />
 
-				<Route path="/conn/*" element={
-					<AuthGard>
-						<PrivateRouter/>
-					</AuthGard>
-				}/>
+					<Route path="/conn/*" element={
+						<AuthGard>
+							<PrivateRouter/>
+						</AuthGard>
+					}/>
 
-				<Route path="/offers" element={<Offers/>} />
-				<Route path="/contact" element={<Contacts/>} />
+					<Route path="/offers" element={<Offers/>} />
+					<Route path="/contact" element={<Contacts/>} />
 
-				<Route path="/connexion" element={<Connexion/>} />
+					<Route path="/connexion" element={<Connexion/>} />
 
-				<Route path="/inscription" element={<Inscription/>} />
-				
-			</Routes>
-		</BrowserRouter>
+					<Route path="/inscription" element={<Inscription/>} />
+					
+				</Routes>
+			</BrowserRouter>
+		</RecoilRoot>
 </>
 );
