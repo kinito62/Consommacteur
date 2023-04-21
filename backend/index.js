@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-import cors from 'cors';
-import cron from 'node-cron';
+import cors from "cors";
+import cron from "node-cron";
 import { sequelize, connectToDb } from "./db.js";
 import authRoutes from "./routes/authRoutes.js";
 import { requireAuth } from "./controllers/authController.js";
@@ -48,9 +48,9 @@ app.use("/areas", requireAuth, subAreaRoutes);
 
 app.use("/sensors", requireAuth, sensorRoutes);
 
-app.use('/scenarios', requireAuth, scenarioRoutes);
+app.use("/scenarios", requireAuth, scenarioRoutes);
 
-app.use('/steps', requireAuth, stepRoutes);
+app.use("/steps", requireAuth, stepRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
