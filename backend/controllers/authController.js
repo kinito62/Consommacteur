@@ -52,7 +52,7 @@ const login = async (req, res) => {
   if (!passwordMatch) {
     return res
       .status(401)
-      .error({ message: "Nom d'utilisateur ou mot de passe incorrect" });
+      .json({ message: "Nom d'utilisateur ou mot de passe incorrect" });
   }
 
   // Génération d'un token JWT pour l'utilisateur
