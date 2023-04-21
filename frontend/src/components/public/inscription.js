@@ -1,122 +1,115 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../../../css/member.css';
 
-export default class inscription extends React.Component {
-	constructor(props) {
-		super(props);
+export default function Inscription() {
+  const lastNameInput = useRef();
+  const firstNameInput = useRef();
+  const emailInput = useRef();
+  const passwordInput = useRef();
+  const confirmPassWordInput = useRef();
+  const navigate = useNavigate();
+  const [inputError, setInputError] = useState(false);
 
-		this.lastNameInput = React.createRef();
-		this.firstNameInput = React.createRef();
-		this.emailInput = React.createRef();
-		this.passwordInput = React.createRef();
-        this.confirmPassWordInput = React.createRef();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: passwordInput.current.value,
+        email: emailInput.current.value,
+        firstName: firstNameInput.current.value,
+        lastName: lastNameInput.current.value,
+      }),
+    };
+	console.log("passwordInput.current.value == confirmPassWordInput.current.value : ", passwordInput.current.value == confirmPassWordInput.current.value)
+    if (passwordInput.current.value == confirmPassWordInput.current.value) {
+      fetch('http://localhost:3000/auth/register', requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          
+
+            navigate('profile');
+          
+        })
+        .catch((error) => {
+          console.log(error);
+
+          setInputError(true);
+          console.log('inputError', inputError);
+        });
+    }else{
+		setInputError(true);
 	}
+  };
 
-	state = {
-		lastName: null,
-		firstName: null,
-		email: null,
-		password: null,
-		confirmPassWord: null,
-	};
-
-	handleSubmit(event) {
-        event.preventDefault();
-
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				password: this.passwordInput.current.value,
-				email: this.emailInput.current.value,
-				firstName: this.firstNameInput.current.value,
-				lastName: this.lastNameInput.current.value,
-			}),
-		};
-
-		fetch('http://localhost:3000/auth/register', requestOptions)
-			.then(response => response.json())
-            .then(data => {
-				if (
-					data &&
-					data.emailInput &&
-					data.passwordInput &&
-					data.firstNameInput &&
-					data.lastNameInput
-				) {
-					this.setState({
-						lastName: data.lastNameInput,
-						firstName: data.firstNameInput,
-						email: data.emailInput,
-						password: data.passwordInput,
-						confirmPassWord: data.confirmPassWordInput,
-					});
-					this.props.navigate('profile');
-				}
-			});
-	}
-
-	render() {
-		return (
-			<div className="layoutForm">
-				<div className="container">
-					<div className="titleForm">
-						<a>Inscription</a>
-					</div>
-					<form className="inscriptionForm" onSubmit={(event) => this.handleSubmit(event)}>
-						<div className="row">
-							<div className="col-25">
-								<label htmlFor="lastName">Nom* </label>
-							</div>
-							<div className="col-75">
-								<input
-									required
-									type="text"
-									id="lastName"
-									ref={this.lastNameInput}
-								/>
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-25">
-								<label htmlFor="firstName">Prénom* </label>
-							</div>
-							<div className="col-75">
-								<input
-									required
-									type="text"
-									id="firstName"
-									ref={this.firstNameInput}
-								/>
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-25">
-								<label htmlFor="email">Email* </label>
-							</div>
-							<div className="col-75">
-								<input required type="email" id="email" ref={this.emailInput} />
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-25">
-								<label htmlFor="passWord">Mot de passe* </label>
-							</div>
-							<div className="col-75">
-								<input
-									required
-									type="password"
-									id="passWord"
-									ref={this.passwordInput}
-								/>
-							</div>
-						</div>
-						<div className="row">
-							<div className="col-25">
-								<label htmlFor="confirmPassword">
-									{' '}
-									Confirmation mot de passe*{' '}
+  return (
+    <div className='layoutForm'>
+      <div className='container'>
+        <div className='titleForm'>
+          <a>Inscription</a>
+        </div>
+		{ inputError &&<>
+        <div className='inputError'>
+        <p>Entrées incorrectes veuillez entrer des saisies valides.</p>
+        </div>
+        </>
+        }
+        <form className='inscriptionForm' onSubmit={handleSubmit}>
+          <div className='row'>
+            <div className='col-25'>
+              <label htmlFor='lastName'>Nom* </label>
+            </div>
+            <div className='col-75'>
+              <input
+                required
+                type='text'
+                id='lastName'
+                ref={lastNameInput}
+              />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-25'>
+              <label htmlFor='firstName'>Prénom* </label>
+            </div>
+            <div className='col-75'>
+              <input
+                required
+                type='text'
+                id='firstName'
+                ref={firstNameInput}
+              />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-25'>
+              <label htmlFor='email'>Email* </label>
+            </div>
+            <div className='col-75'>
+              <input required type='email' id='email' ref={emailInput} />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-25'>
+              <label htmlFor='passWord'>Mot de passe* </label>
+            </div>
+            <div className='col-75'>
+              <input
+                required
+                type='password'
+                id='passWord'
+                ref={passwordInput}
+              />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-25'>
+              <label htmlFor="confirmPassword">
+									
+									Confirmation mot de passe*
 								</label>
 							</div>
 							<div className="col-75">
@@ -124,7 +117,7 @@ export default class inscription extends React.Component {
 									required
 									type="password"
 									id="ConfirmpassWord"
-									ref={this.confirmPassWordInput}
+									ref={confirmPassWordInput}
 								/>
 							</div>
 						</div>
@@ -141,6 +134,4 @@ export default class inscription extends React.Component {
 				</div>
 			</div>
 		);
-	}
 }
-25

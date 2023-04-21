@@ -52,6 +52,13 @@
     max-width: 120px;
   }
 
+  .inputError {
+    border-radius: 5px;
+    background-color: #983b45;
+    color: white;
+    padding: 5px;
+  }
+
   .row:after {
     content: "";
     display: table;

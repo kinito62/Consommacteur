@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { accountService } from '../../services/account.service';
@@ -9,7 +9,7 @@ export default function Connexion() {
   const navigate = useNavigate();
   const emailInput = useRef();
   const passwordInput = useRef();
-
+  const [inputError, setInputError] = useState(false);
   const [b, setN] = useRecoilState(loginState);
 
  
@@ -31,6 +31,12 @@ export default function Connexion() {
         accountService.saveToken(data.token)
         setN(true);
         navigate('/conn/profile')
+      })
+      .catch((error) => {
+        console.log(error)
+        
+        setInputError(true);
+        console.log('inputError', inputError)
       });
   }
 
@@ -40,6 +46,13 @@ export default function Connexion() {
         <div className='titleForm'>
           <a>Connexion</a>
         </div>
+        { inputError &&<>
+        <div className='inputError'>
+        <p>Email ou Mot de passe Incorect.</p>
+        </div>
+        </>
+        }
+        
         <form className='inscriptionForm' onSubmit={event => handleSubmit(event)}>
           <div className='row'>
             <div className='col-25'>
