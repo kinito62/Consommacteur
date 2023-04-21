@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import '../../css/home.css';
+import '../../../css/home.css';
 
 export default class Home extends React.Component {
 	render() {

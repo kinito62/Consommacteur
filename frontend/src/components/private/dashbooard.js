@@ -1,12 +1,12 @@
-import '../../css/dashboard.css';
-import '../../css/offers.css';
+import '../../../css/dashboard.css';
+import '../../../css/offers.css';
 
 import React, { useRef, useEffect } from 'react';
 import {
 	createDoughnutChart,
 	createBarChart,
 	indicateur,
-} from './chart/initCharts';
+} from '../chart/initCharts';
 
 export default function ChartPage() {
 	const doughnutChartRef = useRef(null);
