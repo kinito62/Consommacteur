@@ -2,8 +2,11 @@ import { User } from "../model/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ValidationError } from "sequelize";
+import { loginSchema, registerSchema } from "../validations/authValidation.js";
 
 const register = async (req, res) => {
+  const error = registerSchema.validate(req.body).error;
+  if (error) return res.status(400).json({error});
   const { email, password, firstName, lastName } = req.body;
 
   // Vérification que l'utilisateur n'existe pas déjà
@@ -23,10 +26,10 @@ const register = async (req, res) => {
     password: hashedPassword,
   });
 
-  const error = await user.validate().catch(err => {return err});
-  if (error instanceof ValidationError) {
-    res.status(400).json({error});
-    console.log(error);
+  const validationError = await user.validate().catch(err => {return err});
+  if (validationError instanceof ValidationError) {
+    res.status(400).json({validationError});
+    console.log(validationError);
   } else {
     await user.save();
 
@@ -35,6 +38,8 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
+  const error = loginSchema.validate(req.body).error;
+  if (error) return res.status(400).json({error});
   const { email, password } = req.body;
 
   // Récupération de l'utilisateur depuis la base de données

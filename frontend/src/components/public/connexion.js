@@ -16,17 +16,12 @@ export default function Connexion() {
   
   function handleSubmit(event) {
     event.preventDefault();
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    const body = {
         password: passwordInput.current.value,
         email: emailInput.current.value
-      })
-    };
+      }
 
-    fetch('http://localhost:3000/auth/login', requestOptions)
-      .then(response => response.json())
+    accountService.login(body)
       .then(data => {
         accountService.saveToken(data.token)
         setN(true);

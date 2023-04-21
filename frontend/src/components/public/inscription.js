@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import '../../../css/member.css';
+import { accountService } from '../../services/account.service';
+import { useRecoilState } from 'recoil';
+import { loginState } from '../atoms/login';
 
 export default function Inscription() {
 	const lastNameInput = useRef();
@@ -10,29 +13,46 @@ export default function Inscription() {
 	const confirmPassWordInput = useRef();
 	const navigate = useNavigate();
 	const [inputError, setInputError] = useState(false);
+	const [b, setN] = useRecoilState(loginState)
 
 	const handleSubmit = event => {
 		event.preventDefault();
 
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
+		const body = {
 				password: passwordInput.current.value,
 				email: emailInput.current.value,
 				firstName: firstNameInput.current.value,
 				lastName: lastNameInput.current.value,
-			}),
-		};
-		console.log(
-			'passwordInput.current.value == confirmPassWordInput.current.value : ',
-			passwordInput.current.value == confirmPassWordInput.current.value
-		);
+			}
+		
+		
 		if (passwordInput.current.value == confirmPassWordInput.current.value) {
-			fetch('http://localhost:3000/auth/register', requestOptions)
-				.then(response => response.json())
+
+			accountService.register(body)
 				.then(data => {
-					navigate('profile');
+
+
+					const body = {
+						password: passwordInput.current.value,
+						email: emailInput.current.value
+					  }
+				
+					accountService.login(body)
+					  .then(data => {
+						accountService.saveToken(data.token)
+						setN(true);
+						navigate('/Welcome');
+					  })
+					  .catch((error) => {
+						console.log(error)
+						
+						setInputError(true);
+						console.log('inputError from login', inputError)
+					  });
+
+
+
+					
 				})
 				.catch(error => {
 					console.log(error);

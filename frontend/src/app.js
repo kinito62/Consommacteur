@@ -11,6 +11,7 @@ import AuthGard from './_helpers/AuthGuard';
 import PrivateRouter from './components/private/privateRouter';
 import {RecoilRoot} from 'recoil'
 import Error from '../utils/error';
+import Welcome from '../utils/welcome';
 const root = createRoot(document.querySelector('.appContainer'));
 root.render(
 	<>
@@ -32,6 +33,9 @@ root.render(
 					<Route path="/connexion" element={<Connexion/>} />
 
 					<Route path="/inscription" element={<Inscription/>} />
+
+					
+					<Route path="/welcome" element={<Welcome/>}/>
 					<Route path="/*" element={<Error/>}/>
 				</Routes>
 			</BrowserRouter>
