@@ -29,7 +29,7 @@
     margin-top: 6px;
   }
 
-  button[type=submit] {
+  button[type=submit], .deconnexion {
     background-color: #31525b;
     color: white;
     padding: 12px 20px;
@@ -74,7 +74,7 @@
   }
 
   @media screen and (max-width: 900px) {
-    .lastName, .firstName, .email, .password, .confirmPassword, .connexion, .inscription, input[type=submit] {
+    .lastName, .firstName, .email, .password, .confirmPassword, .connexion, .inscription, .deconnexion, input[type=submit] {
       width: 100%;
       margin-top: 0;
       padding: 1rem;

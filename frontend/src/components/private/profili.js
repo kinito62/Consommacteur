@@ -24,9 +24,13 @@ export default function Profili() {
                     <a>Profile</a>
                 </div>
                 <div className='profile'>
+
+
                     <div className="row">
-                        <button onClick={handleLogout}>Deconnexion</button>
+                            <button className="deconnexion" onClick={handleLogout}>Deconnexion</button>
+                        
                     </div>
+                    
                 </div>
             </div>
         </div>

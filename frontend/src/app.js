@@ -10,6 +10,7 @@ import Inscription from './components/public/inscription';
 import AuthGard from './_helpers/AuthGuard';
 import PrivateRouter from './components/private/privateRouter';
 import {RecoilRoot} from 'recoil'
+import Error from '../utils/error';
 const root = createRoot(document.querySelector('.appContainer'));
 root.render(
 	<>
@@ -31,7 +32,7 @@ root.render(
 					<Route path="/connexion" element={<Connexion/>} />
 
 					<Route path="/inscription" element={<Inscription/>} />
-					
+					<Route path="/*" element={<Error/>}/>
 				</Routes>
 			</BrowserRouter>
 		</RecoilRoot>
