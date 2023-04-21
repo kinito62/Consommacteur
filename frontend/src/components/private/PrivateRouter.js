@@ -18,6 +18,7 @@ const PrivateRouter = () => {
 			    <Route path="profile" element={<Profili/>} />
 			    <Route path="suggestions" element={<Suggestions/>} />
 
+                <Route path="*" element={<Error/>} />
                 
             </Route>
         </Routes>

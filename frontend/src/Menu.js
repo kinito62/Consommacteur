@@ -9,6 +9,10 @@ import { loginState } from "./components/atoms/login";
 export default function Menu() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
   const StateLogin= useRecoilValue(loginState)
+
+//https://icons8.com/icon/set/popular/ios      library icons
+
+
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
@@ -49,41 +53,124 @@ export default function Menu() {
         >
         
           <li>
-            <NavLink to={"/"}>Acceuil</NavLink>
+          
+          <div className="espMem">
+            <NavLink to={"/"}>
+              <button type="button">
+                <a><img className="fit-picture" src='../img/icons/home.png'/>Acceuil</a>
+                </button>
+                </NavLink>
+            </div>
           </li>
          
           {StateLogin && <>
           <li>
-            <NavLink to="/conn/dashboard">Tableau de bord</NavLink>
+          <div className="espMem">
+            
+          </div>
+          <div className="espMem">
+            <NavLink to="/conn/dashboard">
+              
+            <button type="button">
+              
+              <a><img className="fit-picture" src='../img/icons/dashboard.png'/>Tableau de bord</a>
+              </button>
+              </NavLink>
+            </div>
           </li>
           <li>
-            <NavLink to="/conn/places">Mes places</NavLink>
+
+          <div className="espMem">
+            <NavLink to="/conn/places">
+            
+              <button type="button">
+              
+                <a><img className="fit-picture" src='../img/icons/place.png'/>Mes places</a>
+                </button>
+              
+              </NavLink>
+            </div>
           </li>
           <li>
-            <NavLink to="/conn/suggestions">Mes suggestions</NavLink>
+          
+          <div className="espMem">
+            <NavLink to="/conn/suggestions">
+            
+              <button type="button">
+              
+                <a><img className="fit-picture" src='../img/icons/idea.png'/>Mes suggestions</a>
+                </button>
+              
+              </NavLink>
+            </div>
         </li>
 </>}
           
           
 		  <li>
-            <NavLink to="/offers">Nos offres</NavLink>
+      
+      <div className="espMem">
+            <NavLink to="/offers">
+
+            
+              <button type="button">
+              
+                <a><img className="fit-picture" src='../img/icons/offer.png'/>Nos offres</a>
+                </button>
+            
+            </NavLink>
+            </div>
           </li>
           
 		  
 		  <li>
-            <NavLink to="/contact">Nous contacter</NavLink>
+      <div className="espMem">
+            
+          </div>
+      <div className="espMem">
+            <NavLink to="/contact">
+            
+              <button type="button">
+                <a><img className="fit-picture" src='../img/icons/contact.png'/>Nous contacter</a>
+                </button>
+              
+              </NavLink>
+            </div>
           </li>
           
 		  <li>
-      {StateLogin ? <>
-            <NavLink to="/conn/profile">Espace Membre</NavLink>
-            </>
+      {StateLogin ? 
+      
+          <>
+          <div className="espMem">
+            <NavLink to="/conn/profile">
+            
+              <button type="button">
+              
+                <a><img className="fit-picture" src='../img/icons/user-login.png'/>Espace Membre</a>
+              </button>
+              </NavLink> 
+          </div>
+          </>
           :
-          <><NavLink to="/connexion">Espace Membre</NavLink></>
+          <>
+          
+          <div className="espMem">
+          
+            <NavLink to="/connexion">
+              <button type="button">
+            
+              <a><img className="fit-picture" src='../img/icons/user-logout.png'/>Espace Membre</a>
+              </button>
+              </NavLink> 
+          </div>
+          
+          
+          </>
 
         }
         </li>
-
+        
         </ul>
       </div>
     </nav>

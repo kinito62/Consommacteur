@@ -30,13 +30,34 @@
 }
 .navigation-menu li {
   list-style-type: none;
-  margin: 0 1rem;
+  margin: 0 0.1rem;
 }
-.navigation-menu li a {
+.navigation-menu li button a {
   text-decoration: none;
   display: block;
   width: 100%;
   color: #31525b;
+}
+
+.navigation-menu li button{
+  cursor: pointer;
+  min-height: 60px;
+  max-height: 60px;
+  background-color: white;
+  border: 0px;
+  margin: 0.5rem;
+}
+.navigation-menu li button a {
+  font-family: sans-serif;
+  max-height: 60px;
+  font-size: 120%;
+  margin: 0.1rem;
+}
+
+.navigation-menu li button img {
+  vertical-align: middle;
+  max-width: 30px;
+
 }
 
 .hamburger {
@@ -58,19 +79,19 @@
   background-color: #31525b;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1250px) {
   .hamburger {
     display: block;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1250px) {
   .navigation-menu ul {
     display: none;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1250px) {
   .navigation-menu ul {
     position: absolute;
     top: 60px;
@@ -88,23 +109,29 @@
   .navigation-menu li a {
     color: black;
     width: 100%;
-    padding: 1.5rem 0;
+    padding: 0 0 0 0;
   }
-  .navigation-menu li:hover {
+  .navigation-menu li button{
+    width: 100%;
+    margin: 0;
+  }
+  .navigation-menu li:hover, .navigation-menu li button:hover {
     background-color: #eee;
   }
+  
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1250px) {
   .navigation-menu ul {
     display: none;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1250px) {
   .navigation-menu.expanded ul {
     display: block;
   }
 }
+
 
 
