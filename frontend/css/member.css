@@ -29,6 +29,11 @@
     margin-top: 6px;
   }
 
+  .col-75 a {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+
   button[type=submit], .deconnexion {
     background-color: #31525b;
     color: white;

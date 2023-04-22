@@ -22,8 +22,8 @@ export default function Connexion() {
       }
 
     accountService.login(body)
-      .then(data => {
-        accountService.saveToken(data.token)
+      .then(res => {
+        accountService.saveToken(res.data.token)
         setN(true);
         navigate('/conn/profile')
       })
