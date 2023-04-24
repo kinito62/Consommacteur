@@ -4,7 +4,7 @@ const HouseThumbnail = ({
     consultHouse
 }) => (
     
-    <div key={id}>
+    <div>
         <div className="col-25">
             <p>{name} : </p>
         </div>

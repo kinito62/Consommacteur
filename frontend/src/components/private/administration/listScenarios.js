@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ContainerSmall from '../../ContainerSmall';
 import { ScenarioService } from '../../../services/scenario.service';
 import HouseThumbnail from './housethumbnail';
-import '../../../../css/administration.css'
+import '../../../../css/administration.css';
 export default function ListScenarios() {
 	const [scenarios, setScenarios] = useState([]);
 	const [inputError, setInputError] = useState(false);
@@ -21,9 +21,9 @@ export default function ListScenarios() {
 		};
 		ScenarioService.createScenario(body)
 			.then(scenario => {
-				console.log(scenario.data)
+				console.log(scenario.data);
 				setScenarios([...scenarios, scenario.data.scenario]);
-                //setInputError(false);
+				//setInputError(false);
 			})
 			.catch(error => {
 				console.log(error);
@@ -47,18 +47,14 @@ export default function ListScenarios() {
 
 	return (
 		<ContainerSmall title="Liste Scénarios">
-			{scenarios.map((scenario, i) => {
+			{scenarios.map(scenario => {
 				return (
-					<>
-						<React.Fragment key={i}>
-							<HouseThumbnail
-								house={scenario}
-								consultHouse={consultScenario}
-								deleteHouse={deleteScenario}
-								key={i} // ajouter cette propriété avec une valeur unique
-							/>
-						</React.Fragment>
-					</>
+					<HouseThumbnail
+						house={scenario}
+						consultHouse={consultScenario}
+						deleteHouse={deleteScenario}
+						key={scenario.id}
+					/>
 				);
 			})}
 			<div className="addHouse">
