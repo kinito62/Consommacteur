@@ -42,7 +42,7 @@ export default function Profili() {
 							<label htmlFor="lastName">Nom </label>
 						</div>
 						<div className="col-75">
-							<a>{user.firstName}</a>
+							<p>{user.firstName}</p>
 						</div>
 					</div>
 					<div className="row">
@@ -50,7 +50,7 @@ export default function Profili() {
 							<label htmlFor="firstName">Prénom </label>
 						</div>
 						<div className="col-75">
-                        <a>{user.lastName}</a>
+                        <p>{user.lastName}</p>
 						</div>
 					</div>
 					<div className="row">
@@ -58,7 +58,7 @@ export default function Profili() {
 							<label htmlFor="email">Email </label>
 						</div>
 						<div className="col-75">
-                        <a>{user.email}</a>
+                        <p>{user.email}</p>
 						</div>
 					</div>
                     <div className="row">
@@ -66,7 +66,7 @@ export default function Profili() {
 							<label htmlFor="email">Date création du compte </label>
 						</div>
 						<div className="col-75">
-                        <a>{user.createdAt}</a>
+                        <p>{user.createdAt}</p>
 						</div>
 					</div>
 

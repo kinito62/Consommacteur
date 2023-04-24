@@ -15,9 +15,9 @@ export default function Menu() {
 
   return (
     <nav className="navigation">
-      <a href="/" className="brand-name">
+      <p href="/" className="brand-name">
         Consommacteur
-      </a>
+      </p>
       <button
         className="hamburger"
         onClick={() => {
@@ -119,19 +119,20 @@ export default function Menu() {
         </li>
 </>}
           
-          
-		  <li>
-      
+
+
+          <li>
+      <div className="espMem">
+            
+          </div>
       <div className="espMem">
             <NavLink to="/offers">
-
             
               <button type="button">
-              
-                <a><img className="fit-picture" src='../img/icons/offer.png'/>Nos offres</a>
+                <p><img className="fit-picture" src='../img/icons/offer.png'/>Nos offres</p>
                 </button>
-            
-            </NavLink>
+              
+              </NavLink>
             </div>
           </li>
           

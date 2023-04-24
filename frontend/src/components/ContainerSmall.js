@@ -7,7 +7,7 @@ export default function ContainerSmall(props) {
             <div className='layoutForm'>
             <div className="container">
             <div className="titleForm">
-                <a>{props.title}</a>
+                <p>{props.title}</p>
                 </div>
                 {props.children}
             </div>
