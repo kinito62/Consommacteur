@@ -22,7 +22,7 @@ export default function Profili() {
         accountService.getProfile()
             .then( res =>{
                 const d = new Date(res.data.user.createdAt)
-                res.data.user.createdAt = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()} à ${d.getHours()}h${d.getMinutes()}`
+                //res.data.user.createdAt = `${d.getDay()}/${d.getMonth()}/${d.getFullYear()} à ${d.getHours()}h${d.getMinutes()}`
                 setUser(res.data.user)
             }).catch(error => {
                 console.log(error)

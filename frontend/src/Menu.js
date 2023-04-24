@@ -104,6 +104,19 @@ export default function Menu() {
               </NavLink>
             </div>
         </li>
+        <li>
+          
+          <div className="espMem">
+            <NavLink to="/conn/admin">
+            
+              <button type="button">
+              
+                <a><img className="fit-picture" src='../img/icons/admin.png'/>Administration</a>
+                </button>
+              
+              </NavLink>
+            </div>
+        </li>
 </>}
           
           
