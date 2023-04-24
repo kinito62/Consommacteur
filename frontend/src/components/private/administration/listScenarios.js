@@ -21,8 +21,9 @@ export default function ListScenarios() {
 		};
 		ScenarioService.createScenario(body)
 			.then(scenario => {
-				setScenarios([...scenario, scenario.data.scenario]);
-                setInputError(false);
+				console.log(scenario.data)
+				setScenarios([...scenarios, scenario.data.scenario]);
+                //setInputError(false);
 			})
 			.catch(error => {
 				console.log(error);
