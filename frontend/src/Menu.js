@@ -57,7 +57,7 @@ export default function Menu() {
           <div className="espMem">
             <NavLink to={"/"}>
               <button type="button">
-                <a><img className="fit-picture" src='../img/icons/home.png'/>Acceuil</a>
+                <p><img className="fit-picture" src='../img/icons/home.png'/>Acceuil</p>
                 </button>
                 </NavLink>
             </div>
@@ -73,7 +73,7 @@ export default function Menu() {
               
             <button type="button">
               
-              <a><img className="fit-picture" src='../img/icons/dashboard.png'/>Tableau de bord</a>
+              <p><img className="fit-picture" src='../img/icons/dashboard.png'/>Tableau de bord</p>
               </button>
               </NavLink>
             </div>
@@ -85,7 +85,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <a><img className="fit-picture" src='../img/icons/place.png'/>Mes places</a>
+                <p><img className="fit-picture" src='../img/icons/place.png'/>Mes places</p>
                 </button>
               
               </NavLink>
@@ -98,7 +98,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <a><img className="fit-picture" src='../img/icons/idea.png'/>Mes suggestions</a>
+                <p><img className="fit-picture" src='../img/icons/idea.png'/>Mes suggestions</p>
                 </button>
               
               </NavLink>
@@ -111,7 +111,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <a><img className="fit-picture" src='../img/icons/admin.png'/>Administration</a>
+                <p><img className="fit-picture" src='../img/icons/admin.png'/>Administration</p>
                 </button>
               
               </NavLink>
@@ -144,7 +144,7 @@ export default function Menu() {
             <NavLink to="/contact">
             
               <button type="button">
-                <a><img className="fit-picture" src='../img/icons/contact.png'/>Nous contacter</a>
+                <p><img className="fit-picture" src='../img/icons/contact.png'/>Nous contacter</p>
                 </button>
               
               </NavLink>
@@ -160,7 +160,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <a><img className="fit-picture" src='../img/icons/user-login.png'/>Espace Membre</a>
+                <p><img className="fit-picture" src='../img/icons/user-login.png'/>Espace Membre</p>
               </button>
               </NavLink> 
           </div>
@@ -173,7 +173,7 @@ export default function Menu() {
             <NavLink to="/connexion">
               <button type="button">
             
-              <a><img className="fit-picture" src='../img/icons/user-logout.png'/>Espace Membre</a>
+              <p><img className="fit-picture" src='../img/icons/user-logout.png'/>Espace Membre</p>
               </button>
               </NavLink> 
           </div>

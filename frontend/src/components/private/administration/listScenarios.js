@@ -1,12 +1,86 @@
-import React from "react"
-import ContainerSmall from "../../ContainerSmall"
+import React, { useEffect, useRef, useState } from 'react';
+import ContainerSmall from '../../ContainerSmall';
+import { ScenarioService } from '../../../services/scenario.service';
+import HouseThumbnail from './housethumbnail';
+import '../../../../css/administration.css'
 export default function ListScenarios() {
+	const [scenarios, setScenarios] = useState([]);
+	const [inputError, setInputError] = useState(false);
+	const nameScenario = useRef();
 
-    
-		return (
-            <ContainerSmall title="Liste Scénarios">
+	useEffect(() => {
+		ScenarioService.getScenarios().then(scenarios => {
+			setScenarios(scenarios.data.scenarios);
+		});
+	}, []);
 
-            </ContainerSmall>
-        )
-    
+	function handleSubmit(event) {
+		event.preventDefault();
+		const body = {
+			name: nameScenario.current.value,
+		};
+		ScenarioService.createScenario(body)
+			.then(scenario => {
+				setScenarios([...scenario, scenario.data.scenario]);
+                setInputError(false);
+			})
+			.catch(error => {
+				console.log(error);
+				setInputError(true);
+			});
+	}
+	function consultScenario(id) {
+		console.log(id);
+	}
+
+	function deleteScenario(id) {
+		ScenarioService.deleteScenario(id)
+			.then(res => {
+				setScenarios(scenarios.filter(scenario => scenario.id !== id));
+			})
+			.catch(error => {
+				console.log(error);
+				setInputError(true);
+			});
+	}
+
+	return (
+		<ContainerSmall title="Liste Scénarios">
+			{scenarios.map((scenario, i) => {
+				return (
+					<>
+						<React.Fragment key={i}>
+							<HouseThumbnail
+								house={scenario}
+								consultHouse={consultScenario}
+								deleteHouse={deleteScenario}
+								key={i} // ajouter cette propriété avec une valeur unique
+							/>
+						</React.Fragment>
+					</>
+				);
+			})}
+			<div className="addHouse">
+				<form onSubmit={event => handleSubmit(event)}>
+					<div className="row">
+						<div className="col-25">
+							<input required type="text" id="name" ref={nameScenario} />
+						</div>
+						<div className="col-75">
+							<button type="submit">ajouter</button>
+						</div>
+					</div>
+				</form>
+				{inputError && (
+					<>
+						<div className="layoutInputError">
+							<div className="inputError">
+								<p>Ce nom de maison existe peut être déjà.</p>
+							</div>
+						</div>
+					</>
+				)}
+			</div>
+		</ContainerSmall>
+	);
 }
