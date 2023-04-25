@@ -13,8 +13,13 @@ let deleteScenario = id => {
     return Axios.delete(`/scenarios/${id}`)
 }
 
+const getScenario = id => {
+    return Axios.get(`/scenarios/${id}`);
+}
+
 export const ScenarioService = {
     getScenarios,
     createScenario,
-    deleteScenario
+    deleteScenario,
+    getScenario
 }

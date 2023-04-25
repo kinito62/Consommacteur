@@ -3,6 +3,7 @@ import ContainerSmall from '../../ContainerSmall';
 import { ScenarioService } from '../../../services/scenario.service';
 import HouseThumbnail from './housethumbnail';
 import '../../../../css/administration.css';
+import ScenarioThumbnail from './ScenarioThumbnail';
 export default function ListScenarios() {
 	const [scenarios, setScenarios] = useState([]);
 	const [inputError, setInputError] = useState(false);
@@ -30,9 +31,6 @@ export default function ListScenarios() {
 				setInputError(true);
 			});
 	}
-	function consultScenario(id) {
-		console.log(id);
-	}
 
 	function deleteScenario(id) {
 		ScenarioService.deleteScenario(id)
@@ -49,10 +47,9 @@ export default function ListScenarios() {
 		<ContainerSmall title="Liste Scénarios">
 			{scenarios.map(scenario => {
 				return (
-					<HouseThumbnail
-						house={scenario}
-						consultHouse={consultScenario}
-						deleteHouse={deleteScenario}
+					<ScenarioThumbnail
+						scenario={scenario}
+						deleteScenario={deleteScenario}
 						key={scenario.id}
 					/>
 				);

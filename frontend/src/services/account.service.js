@@ -29,8 +29,6 @@ let getToken = () => {
 	return localStorage.getItem('token');
 };
 
-
-
 export const accountService = {
 	login,
 	register,
