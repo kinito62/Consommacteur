@@ -17,10 +17,30 @@ module.exports = (env, { mode }) => ({
 	// connexion webpack <-> babel :
 	module: {
 
+		
+		
 
 		rules: [
+
+			{
+				test: /\.png$/,
+				loader: 'file-loader',
+				options: {
+				  name: '[name].[ext]',
+				  outputPath: 'images/'
+				}
+			  },
+			  {
+				test: /\.jpg$/,
+				loader: 'file-loader',
+				options: {
+				  name: '[name].[ext]',
+				  outputPath: 'images/'
+				}
+			  },
 			
-				
+			
+			
 			{
                 test: /.css$/i,
                 use: ['style-loader', 'css-loader'],

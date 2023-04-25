@@ -6,6 +6,16 @@ import '../css/header.css'
 import { useRecoilValue } from "recoil";
 import { loginState } from "./components/atoms/login";
 
+import dashboard from './img/icons/dashboard.png';
+import home from './img/icons/home.png';
+import place from './img/icons/place.png';
+import idea from'./img/icons/idea.png';
+import admin from'./img/icons/admin.png'
+import offer from './img/icons/offer.png';
+import contact from './img/icons/contact.png';
+import userLogin from './img/icons/user-login.png';
+import userLogout from'./img/icons/user-logout.png'
+
 export default function Menu() {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
   const StateLogin= useRecoilValue(loginState)
@@ -57,7 +67,7 @@ export default function Menu() {
           <div className="espMem">
             <NavLink to={"/"}>
               <button type="button">
-                <p><img className="fit-picture" src='../img/icons/home.png'/>Acceuil</p>
+                <p><img className="fit-picture" src={home}/>Acceuil</p>
                 </button>
                 </NavLink>
             </div>
@@ -71,7 +81,7 @@ export default function Menu() {
               
             <button type="button">
               
-              <p><img className="fit-picture" src='../img/icons/dashboard.png'/>Tableau de bord</p>
+              <p><img className="fit-picture" src={dashboard}/>Tableau de bord</p>
               </button>
               </NavLink>
             </div>
@@ -83,7 +93,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <p><img className="fit-picture" src='../img/icons/place.png'/>Mes places</p>
+                <p><img className="fit-picture" src={place}/>Mes places</p>
                 </button>
               
               </NavLink>
@@ -96,7 +106,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <p><img className="fit-picture" src='../img/icons/idea.png'/>Mes suggestions</p>
+                <p><img className="fit-picture" src={idea}/>Mes suggestions</p>
                 </button>
               
               </NavLink>
@@ -109,7 +119,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <p><img className="fit-picture" src='../img/icons/admin.png'/>Administration</p>
+                <p><img className="fit-picture" src={admin}/>Administration</p>
                 </button>
               
               </NavLink>
@@ -125,7 +135,7 @@ export default function Menu() {
             <NavLink to="/offers">
             
               <button type="button">
-                <p><img className="fit-picture" src='../img/icons/offer.png'/>Nos offres</p>
+                <p><img className="fit-picture" src={offer}/>Nos offres</p>
                 </button>
               
               </NavLink>
@@ -139,7 +149,7 @@ export default function Menu() {
             <NavLink to="/contact">
             
               <button type="button">
-                <p><img className="fit-picture" src='../img/icons/contact.png'/>Nous contacter</p>
+                <p><img className="fit-picture" src={contact}/>Nous contacter</p>
                 </button>
               
               </NavLink>
@@ -155,7 +165,7 @@ export default function Menu() {
             
               <button type="button">
               
-                <p><img className="fit-picture" src='../img/icons/user-login.png'/>Espace Membre</p>
+                <p><img className="fit-picture" src={userLogin}/>Espace Membre</p>
               </button>
               </NavLink> 
           </div>
@@ -168,7 +178,7 @@ export default function Menu() {
             <NavLink to="/connexion">
               <button type="button">
             
-              <p><img className="fit-picture" src='../img/icons/user-logout.png'/>Espace Membre</p>
+              <p><img className="fit-picture" src={userLogout}/>Espace Membre</p>
               </button>
               </NavLink> 
           </div>

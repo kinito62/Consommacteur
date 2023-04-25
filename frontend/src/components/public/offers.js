@@ -17,8 +17,8 @@ export default class Offers extends React.Component {
                                 <div className='offerContainer' key={offer.id}>
                                     <div className="cardTitleOffer">{offer.name}</div>
                                         <div className="cardImgsOffer"> 
-                                            <img className="cardImgOffer" src={`../../img/offers/${offer.photo[0]}.webp`} />
-                                            <img className="cardImgOffer" src={`../../img/offers/${offer.photo[1]}.webp`} />
+                                            <img className="cardImgOffer" src={`../img/offers/${offer.photo[0]}.jpg`} />
+                                            <img className="cardImgOffer" src={`../img/offers/${offer.photo[1]}.jpg`} />
                                         </div>
                                     <p className="card_text">{offer.description}</p>
                                     <div className='row'>
