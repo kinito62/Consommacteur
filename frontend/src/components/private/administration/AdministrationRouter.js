@@ -3,7 +3,7 @@ import ALayout from './ALayout';
 
 import ListScenarios from './listScenarios';
 import ListHouse from './listHouse';
-import Scenario from './scenario';
+import Scenario from './Scenario';
 const AdministrationRouter = () => {
 	return (
 		<Routes>

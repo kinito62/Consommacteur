@@ -4,19 +4,25 @@ import { ScenarioService } from '../../../services/scenario.service';
 import ContainerSmall from '../../ContainerSmall';
 
 export default function Scenario() {
-	const  paramScen  = useParams();
+	const { scenarioId } = useParams();
 
-	console.log(paramScen);
-
-	const [scenario, setScenario] = useState({});
+    const [scenario, setScenario] = useState({});
+    const [scenarioSteps, setScenarioSteps] = useState([]);
 
 	useEffect(() => {
-		console.log(paramScen)
-		//setScenario(ScenarioService.getScenario(scenarioId)); // Supprimez 'eded' car il s'agit d'une valeur de chaîne qui ne correspond pas au format de données que vous attendez de ScenarioService.getScenario()
-	}, []);
+		ScenarioService.getScenario(scenarioId)
+			.then(response => response.data.scenario)
+			.then(scenario => {
+				setScenario(scenario);
+			});
+    }, []);
+    
+    useEffect(() => {
+		}, [scenario]);
 
 	return (
-			<p>cc je suis un scenario ({scenarioId})</p>
-		
+        <ContainerSmall title={`Scénario : ${scenario.name}`}>
+            
+        </ContainerSmall>
 	);
 }
