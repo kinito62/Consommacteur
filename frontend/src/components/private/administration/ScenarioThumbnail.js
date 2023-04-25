@@ -2,16 +2,18 @@ import { NavLink } from 'react-router-dom';
 
 const ScenarioThumbnail = ({
 	scenario: { id, name, userId, updatedAt, createdAt },
-	deleteScenario,
+	consultScenario,
+	deleteScenario
 }) => (
 	<div>
 		<div className="col-25">
 			<p>{name} : </p>
 		</div>
 		<div className="col-75">
-			<NavLink to={`/conn/admin/scenarios/${id}`} className="buttonList">
+			
+			<button onClick={() => consultScenario(id)} className="buttonList suppr">
 				Consulter
-			</NavLink>
+			</button>
 			<button onClick={() => deleteScenario(id)} className="buttonList suppr">
 				Supprimer
 			</button>

@@ -8,7 +8,7 @@ import Contacts from './components/public/contacts';
 import Connexion from './components/public/connexion';
 import Inscription from './components/public/inscription';
 import AuthGard from './_helpers/AuthGuard';
-import PrivateRouter from './components/private/privateRouter';
+import PrivateRouter from './components/private/PrivateRouter';
 import {RecoilRoot} from 'recoil'
 import Error from '../utils/error';
 import Welcome from '../utils/welcome';

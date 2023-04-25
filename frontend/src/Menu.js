@@ -65,9 +65,7 @@ export default function Menu() {
          
           {StateLogin && <>
           <li>
-          <div className="espMem">
-            
-          </div>
+          
           <div className="espMem">
             <NavLink to="/conn/dashboard">
               
@@ -122,9 +120,7 @@ export default function Menu() {
 
 
           <li>
-      <div className="espMem">
-            
-          </div>
+      
       <div className="espMem">
             <NavLink to="/offers">
             
@@ -138,9 +134,7 @@ export default function Menu() {
           
 		  
 		  <li>
-      <div className="espMem">
-            
-          </div>
+      
       <div className="espMem">
             <NavLink to="/contact">
             

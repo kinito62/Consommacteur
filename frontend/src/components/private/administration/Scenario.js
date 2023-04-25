@@ -3,21 +3,20 @@ import { useParams } from 'react-router-dom';
 import { ScenarioService } from '../../../services/scenario.service';
 import ContainerSmall from '../../ContainerSmall';
 
-export default function Scenario(props) {
-	const { scenarioId } = useParams();
+export default function Scenario() {
+	const  paramScen  = useParams();
 
-	console.log(scenarioId);
+	console.log(paramScen);
 
-	const [scenario, setScenario] = useState();
+	const [scenario, setScenario] = useState({});
 
 	useEffect(() => {
-		setScenario(ScenarioService.getScenario(scenarioId));
-		console.log(scenario);
+		console.log(paramScen)
+		//setScenario(ScenarioService.getScenario(scenarioId)); // Supprimez 'eded' car il s'agit d'une valeur de chaîne qui ne correspond pas au format de données que vous attendez de ScenarioService.getScenario()
 	}, []);
 
 	return (
-		<ContainerSmall>
-			<div>cc je suis un scenario ({scenarioId})</div>
-		</ContainerSmall>
+			<p>cc je suis un scenario ({scenarioId})</p>
+		
 	);
 }

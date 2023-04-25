@@ -4,10 +4,14 @@ import { ScenarioService } from '../../../services/scenario.service';
 import HouseThumbnail from './housethumbnail';
 import '../../../../css/administration.css';
 import ScenarioThumbnail from './ScenarioThumbnail';
+import { useNavigate } from 'react-router-dom';
+
+
 export default function ListScenarios() {
 	const [scenarios, setScenarios] = useState([]);
 	const [inputError, setInputError] = useState(false);
 	const nameScenario = useRef();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		ScenarioService.getScenarios().then(scenarios => {
@@ -32,6 +36,11 @@ export default function ListScenarios() {
 			});
 	}
 
+	function consultScenario(id){
+		console.log(id)
+		navigate(`/conn/admin/scenarios/${id}`)
+	}
+
 	function deleteScenario(id) {
 		ScenarioService.deleteScenario(id)
 			.then(res => {
@@ -50,6 +59,7 @@ export default function ListScenarios() {
 					<ScenarioThumbnail
 						scenario={scenario}
 						deleteScenario={deleteScenario}
+						consultScenario={consultScenario}
 						key={scenario.id}
 					/>
 				);

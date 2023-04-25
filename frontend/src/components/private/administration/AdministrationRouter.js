@@ -3,13 +3,11 @@ import ALayout from './ALayout';
 
 import ListScenarios from './listScenarios';
 import ListHouse from './listHouse';
-import Scenario from './Scenario';
+import Scenario from './scenario';
 const AdministrationRouter = () => {
 	return (
 		<Routes>
-			<Route element={<ALayout />}>
-					<Route path="/scenarios/:scenarioId" element={<Scenario />} />
-
+			<Route path="/" element={<ALayout />}>
 				<Route
 					path="/"
 					element={
@@ -19,8 +17,11 @@ const AdministrationRouter = () => {
 						</>
 					}
 				/>
+				<Route path="/scenarios/:scenarioId" element={<Scenario />} />
+				<Route path="/*" element={<Error />} />
 			</Route>
 		</Routes>
 	);
 };
 export default AdministrationRouter;
+
