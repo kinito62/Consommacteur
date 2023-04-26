@@ -19,11 +19,12 @@
 	margin-right: auto;
 	margin-left: auto;
 	border-radius: 5px;
+	border: 0.2rem solid;
+	border-color: #ffa101;
 	background-color: white;
 	padding: 20px;
 	margin-top: 20px;
-	border: 0.2rem solid;
-	border-color: #ffa101;
+	
 }
 
 @media screen and (max-width: 700px) {

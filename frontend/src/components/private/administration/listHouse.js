@@ -35,7 +35,6 @@ export default function ListHouse() {
 			});
 	}
 	function consultHouse(id) {
-		console.log(id);
 		navigate(`/conn/admin/houses/${id}`)
 	}
 
@@ -66,10 +65,10 @@ export default function ListHouse() {
 			<div className="addHouse">
 				<form onSubmit={event => handleSubmit(event)}>
 					<div className="row">
-						<div className="col-25">
+						<div className="col-2">
 							<input required type="text" id="name" ref={nameHouse} />
 						</div>
-						<div className="col-75">
+						<div className="col-1">
 							<button type="submit">ajouter</button>
 						</div>
 					</div>

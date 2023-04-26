@@ -20,7 +20,6 @@ const AreaContainer = ({
 	}, []);
 
     function deleteSensor(idSensor){
-        console.log('id sensor to delete : ', idSensor)
         sensorService.deleteSensor(idSensor)
         .then(res=>{
             setSensors(sensors.filter(sensor => sensor.id !== idSensor));
@@ -44,11 +43,13 @@ const AreaContainer = ({
     }
 
 	return (
-		<div className="card">
+		<div className="card area">
 			<div className="titleCard">
 				<a>{`pièce : ${name}`}</a>
 			</div>
-
+            <p>Sensors : </p>
+            <div className='sensorsContainer'>
+                
 			{sensors.map(sensor => {
 				return (
 					<div className='sensorContainer' key={sensor.id}>
@@ -68,6 +69,7 @@ const AreaContainer = ({
 					</div>
 				);
 			})}
+            </div>
             <div className="addSensor">
 				<form onSubmit={event => handleSubmit(event)}>
 					<div className="row">
@@ -75,7 +77,7 @@ const AreaContainer = ({
 							<input required type="text" id="name" ref={nameNewSensor} />
 						</div>
 						<div className="col-2">
-							<button type="submit">ajouter</button>
+							<button type="submit">ajouter sensor</button>
 						</div>
 					</div>
 				</form>
@@ -83,7 +85,7 @@ const AreaContainer = ({
 			</div>
 
 			<button onClick={() => deleteArea(id)} className="buttonList suppr">
-				Supprimer
+				Supprimer pièce
 			</button>
 		</div>
 	);
