@@ -17,9 +17,24 @@ const getScenario = id => {
     return Axios.get(`/scenarios/${id}`);
 }
 
+const startScenario = id => {
+    return Axios.post(`/scenarios/${id}/actions/start`);
+}
+
+const pauseScenario = id => {
+	return Axios.post(`/scenarios/${id}/actions/pause`);
+};
+
+const stopScenario = id => {
+	return Axios.post(`/scenarios/${id}/actions/stop`);
+};
+
 export const ScenarioService = {
     getScenarios,
     createScenario,
     deleteScenario,
-    getScenario
+    getScenario,
+    startScenario,
+    pauseScenario,
+    stopScenario,
 }

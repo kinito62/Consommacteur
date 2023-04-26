@@ -10,8 +10,7 @@ const StepThumbnail = ({
 			<div className="col-25">
 				<p>
 					Etape {stepIndex} : le capteur {sensorId} consomme {value} {unit}{' '}
-					après {executionSecondDelay} secondes.
-					{executedAt && '✓'}
+					après {executionSecondDelay} secondes. {executedAt && `Exécutée le : ${executedAt}`}
 				</p>
 			</div>
 			<div className="col-75">

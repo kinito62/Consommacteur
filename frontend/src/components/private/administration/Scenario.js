@@ -11,7 +11,8 @@ export default function Scenario() {
 
 	const [scenario, setScenario] = useState({});
 	const [steps, setSteps] = useState([]);
-	const [scenarioStatus, setScenarioStatus] = useState('arrété');
+	const [scenarioStatusTitle, setScenarioStatusTitle] = useState('arrété');
+	const [scenarioStatus, setScenarioStatus] = useState('stopped');
 
 	const valueRef = createRef();
 	const sensorIdRef = createRef();
@@ -20,25 +21,18 @@ export default function Scenario() {
 	const typeRef = createRef();
 
 	useEffect(() => {
+		setScenarioInfos();
+
+		setInterval(() => {
+			setScenarioInfos();
+		}, 5000);
+	}, []);
+
+	const setScenarioInfos = () => {
 		ScenarioService.getScenario(scenarioId)
 			.then(response => response.data.scenario)
 			.then(scenario => {
 				setScenario(scenario);
-
-				switch (scenario.status) {
-					case 'stopped':
-						setScenarioStatus('arrété');
-						break;
-					case 'paused':
-						setScenarioStatus('en pause');
-						break;
-					case 'started':
-						setScenarioStatus('en cours');
-						break;
-
-					default:
-						break;
-				}
 
 				StepService.getScenarioSteps(scenario.id)
 					.then(response => response.data.steps)
@@ -46,7 +40,28 @@ export default function Scenario() {
 						setSteps(steps);
 					});
 			});
-	}, []);
+	};
+
+	useEffect(() => {
+		setScenarioStatus(scenario.status);
+	}, [scenario]);
+
+	useEffect(() => {
+		switch (scenarioStatus) {
+			case 'stopped':
+				setScenarioStatusTitle('arrété');
+				break;
+			case 'paused':
+				setScenarioStatusTitle('en pause');
+				break;
+			case 'started':
+				setScenarioStatusTitle('en cours');
+				break;
+
+			default:
+				break;
+		}
+	}, [scenarioStatus]);
 
 	const deleteStep = id => {
 		StepService.deleteStep(id)
@@ -78,8 +93,55 @@ export default function Scenario() {
 			});
 	};
 
+	const handleScenarioAction = action => {
+		switch (action) {
+			case 'start':
+				ScenarioService.startScenario(scenarioId).then(response => {
+					if (response.status === 200) setScenarioStatus('started');
+					setScenarioInfos();
+				});
+				break;
+			case 'stop':
+				ScenarioService.stopScenario(scenarioId).then(response => {
+					if (response.status === 200) setScenarioStatus('stopped');
+					setScenarioInfos();
+				});
+				break;
+			case 'pause':
+				ScenarioService.pauseScenario(scenarioId).then(response => {
+					if (response.status === 200) setScenarioStatus('paused');
+					setScenarioInfos();
+				});
+				break;
+			default:
+				console.log('Action sur le scénario impossible');
+				break;
+		}
+	};
+
 	return (
-		<ContainerSmall title={`Scénario : ${scenario.name} (${scenarioStatus})`}>
+		<ContainerSmall
+			title={`Scénario : ${scenario.name} (${scenarioStatusTitle})`}
+		>
+			{scenarioStatus !== 'stopped' && `Démarré depuis ${scenario.startedAt}`}
+			<button
+				onClick={() => handleScenarioAction('start')}
+				disabled={scenarioStatus === 'started'}
+			>
+				Démarrer
+			</button>
+			<button
+				onClick={() => handleScenarioAction('pause')}
+				disabled={scenarioStatus !== 'started'}
+			>
+				Pause
+			</button>
+			<button
+				onClick={() => handleScenarioAction('stop')}
+				disabled={scenarioStatus === 'stopped'}
+			>
+				Arrêter
+			</button>
 			{steps.map((step, stepIndex) => {
 				return (
 					<StepThumbnail

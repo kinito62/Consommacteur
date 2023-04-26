@@ -12,14 +12,14 @@ const pauseScenario = async (scenario) => {
 };
 
 const stopScenario = async (scenario) => {
-  scenario.status = "stopped";
   scenario.startedAt = null;
-
-  ScenarioStep.update(
+  scenario.status = 'stopped';
+  await scenario.save();
+  
+  await ScenarioStep.update(
     { executedAt: null },
     { where: { scenarioId: scenario.id } }
   );
-  await scenario.save();
 };
 
 export { startScenario, pauseScenario, stopScenario };

@@ -41,7 +41,7 @@ const executeScenario = async (scenario) => {
     step = await step.getNextStep();
   }
 
-  stopScenario();
+  stopScenario(scenario);
 };
 
 const getNextScenarioStep = async (scenario) => {
