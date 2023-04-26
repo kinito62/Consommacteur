@@ -3,6 +3,7 @@ import { houseService } from '../../services/house.service';
 import '../../../css/places.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { areaService } from '../../services/area.service';
+import AreaPlace from './AreaPlace';
 
 export default function Places() {
 	const [housesList, setHousesList] = useState([]);
@@ -13,17 +14,18 @@ export default function Places() {
 		console.log(houseId);
 
 		if (houseId) {
-			areaService.getAreas(houseId).then(resAreas => {
-				console.log('areas : ', resAreas);
+			areaService.getAreas(houseId)
+            .then(resAreas => {
 				setAreas(resAreas.data.areas);
+                console.log('areas : ', areas);
 			});
 		}
 
 		houseService
 			.getHouses()
 			.then(houses => {
-				console.log(houses);
 				setHousesList(houses.data.houses);
+                console.log('housesList', housesList)
 			})
 			.catch(error => {
 				console.log(error);
@@ -54,12 +56,10 @@ export default function Places() {
 					})}
 				</div>
 			</div>
-			
-			<div>
-            {
-                
-            }
-            </div>
+			<AreaPlace
+            areas={areas}
+            />
 		</>
+        
 	);
 }
