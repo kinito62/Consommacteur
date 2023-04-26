@@ -1,0 +1,27 @@
+.cardLayout{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    min-width: 300px;
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    }
+
+.card{
+    min-width: 350px;
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px;
+    margin-top:5px;
+}
+
+.titleCard{
+    text-decoration: none;
+    color: #ffa101;
+    break-inside: auto;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+  }

@@ -11,7 +11,7 @@ const ScenarioThumbnail = ({
 		</div>
 		<div className="col-75">
 			
-			<button onClick={() => consultScenario(id)} className="buttonList suppr">
+			<button onClick={() => consultScenario(id)} className="buttonList">
 				Consulter
 			</button>
 			<button onClick={() => deleteScenario(id)} className="buttonList suppr">
