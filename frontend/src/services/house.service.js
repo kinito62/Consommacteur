@@ -4,6 +4,10 @@ let getHouses = ()=>{
     return Axios.get('/houses');
 }
 
+let getHouse = (id) => {
+    return Axios.get(`/houses/${id}`)
+}
+
 let createHouse = (credentials) => {
     return Axios.post(`/houses`, credentials);
 }
@@ -15,6 +19,7 @@ let deleteHouse = id => {
 
 export const houseService = {
     getHouses,
+    getHouse,
     createHouse,
     deleteHouse
 }

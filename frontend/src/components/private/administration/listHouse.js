@@ -3,11 +3,15 @@ import ContainerSmall from '../../ContainerSmall';
 import { houseService } from '../../../services/house.service';
 import '../../../../css/administration.css';
 import HouseThumbnail from './housethumbnail';
+import { useNavigate } from 'react-router-dom';
 
 export default function ListHouse() {
 	const [houses, setHouses] = useState([]);
 	const [inputError, setInputError] = useState(false);
 	const nameHouse = useRef();
+	const navigate = useNavigate();
+
+	
 	useEffect(() => {
 		houseService.getHouses().then(houses => {
 			setHouses(houses.data.houses);
@@ -32,6 +36,7 @@ export default function ListHouse() {
 	}
 	function consultHouse(id) {
 		console.log(id);
+		navigate(`/conn/admin/houses/${id}`)
 	}
 
 	function deleteHouse(id) {
