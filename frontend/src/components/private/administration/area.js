@@ -7,7 +7,7 @@ const AreaContainer = ({
 	deleteArea,
 }) => {
 	const [sensors, setSensors] = useState([]);
-    const nameNewSensor = useRef();
+	const nameNewSensor = useRef();
 	useEffect(() => {
 		sensorService
 			.getSensors(id)
@@ -19,41 +19,40 @@ const AreaContainer = ({
 			});
 	}, []);
 
-    function deleteSensor(idSensor){
-        sensorService.deleteSensor(idSensor)
-        .then(res=>{
-            setSensors(sensors.filter(sensor => sensor.id !== idSensor));
-        }).catch(error => {
-            console.log(error)
-        })
-    }
+	function deleteSensor(idSensor) {
+		sensorService
+			.deleteSensor(idSensor)
+			.then(res => {
+				setSensors(sensors.filter(sensor => sensor.id !== idSensor));
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 
-    function handleSubmit(event) {
+	function handleSubmit(event) {
 		event.preventDefault();
-        const body={
-            name:nameNewSensor.current.value
-        }
-        sensorService.createSensor(body, id)
-        .then(res =>{
-            setSensors([...sensors, res.data.sensor])
-
-        }).catch(err =>{
-
-        })
-    }
+		const body = {
+			name: nameNewSensor.current.value,
+		};
+		sensorService
+			.createSensor(body, id)
+			.then(res => {
+				setSensors([...sensors, res.data.sensor]);
+			})
+			.catch(err => {});
+	}
 
 	return (
 		<div className="card area">
 			<div className="titleCard">
 				<a>{`pièce : ${name}`}</a>
 			</div>
-            <p>Sensors : </p>
-            <div className='sensorsContainer'>
-                
-			{sensors.map(sensor => {
-				return (
-					<div className='sensorContainer' key={sensor.id}>
-                        
+			<p>Sensors : </p>
+			<div className="sensorsContainer">
+				{sensors.map(sensor => {
+					return (
+						<div className="sensorContainer" key={sensor.id}>
 							<div className="col-1">
 								<p>{sensor.name} : </p>
 							</div>
@@ -64,13 +63,12 @@ const AreaContainer = ({
 								>
 									Supprimer
 								</button>
-							
+							</div>
 						</div>
-					</div>
-				);
-			})}
-            </div>
-            <div className="addSensor">
+					);
+				})}
+			</div>
+			<div className="addSensor">
 				<form onSubmit={event => handleSubmit(event)}>
 					<div className="row">
 						<div className="col-1">
@@ -81,7 +79,6 @@ const AreaContainer = ({
 						</div>
 					</div>
 				</form>
-				
 			</div>
 
 			<button onClick={() => deleteArea(id)} className="buttonList suppr">

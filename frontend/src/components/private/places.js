@@ -14,10 +14,9 @@ export default function Places() {
 		console.log(houseId);
 
 		if (houseId) {
-			areaService.getAreas(houseId)
-            .then(resAreas => {
+			areaService.getAreas(houseId).then(resAreas => {
 				setAreas(resAreas.data.areas);
-                console.log('areas : ', areas);
+				console.log('areas : ', areas);
 			});
 		}
 
@@ -25,7 +24,7 @@ export default function Places() {
 			.getHouses()
 			.then(houses => {
 				setHousesList(houses.data.houses);
-                console.log('housesList', housesList)
+				console.log('housesList', housesList);
 			})
 			.catch(error => {
 				console.log(error);
@@ -42,7 +41,7 @@ export default function Places() {
 			<div className="container">
 				<h1 className="titleForm">liste des Maisons</h1>
 				<div className="buttonsHouses">
-					{housesList.map((house) => {
+					{housesList.map(house => {
 						return (
 							<div key={house.id}>
 								<button
@@ -56,10 +55,7 @@ export default function Places() {
 					})}
 				</div>
 			</div>
-			<AreaPlace
-            areas={areas}
-            />
+			<AreaPlace areas={areas} />
 		</>
-        
 	);
 }
