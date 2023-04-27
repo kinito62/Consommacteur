@@ -42,9 +42,9 @@ export default function Places() {
 			<div className="container">
 				<h1 className="titleForm">liste des Maisons</h1>
 				<div className="buttonsHouses">
-					{housesList.map((house, i) => {
+					{housesList.map((house) => {
 						return (
-							<div key={i}>
+							<div key={house.id}>
 								<button
 									onClick={() => consultHouse(house.id)}
 									className="buttonList house"
