@@ -5,6 +5,7 @@ import ContainerSmall from '../../ContainerSmall';
 import { StepService } from '../../../services/step.service';
 import ScenarioThumbnail from './ScenarioThumbnail';
 import StepThumbnail from './StepThumbnail';
+import { sensorService } from '../../../services/sensor.service';
 
 export default function Scenario() {
 	const { scenarioId } = useParams();
@@ -13,6 +14,7 @@ export default function Scenario() {
 	const [steps, setSteps] = useState([]);
 	const [scenarioStatusTitle, setScenarioStatusTitle] = useState('arrété');
 	const [scenarioStatus, setScenarioStatus] = useState('stopped');
+	const [sensors, setSensors] = useState([]);
 
 	const valueRef = createRef();
 	const sensorIdRef = createRef();
@@ -21,7 +23,12 @@ export default function Scenario() {
 	const typeRef = createRef();
 
 	useEffect(() => {
-		setScenarioInfos();
+		sensorService.getHousesAreasSensors().then((response) => {
+			setSensors(response.houses);
+			console.log(response.houses);
+		}); 
+
+		setScenarioInfos();	
 
 		setInterval(() => {
 			setScenarioInfos();
@@ -156,14 +163,28 @@ export default function Scenario() {
 				<form onSubmit={event => handleSubmit(event)}>
 					<div className="row">
 						<div className="col-25">
-							<label htmlFor="step-sensorId">ID sensor</label>
-							<input
+							<label htmlFor="step-sensorId">Sensor</label>
+							<select
 								required
-								type="number"
 								id="step-sensorId"
-								placeholder="5"
-								ref={valueRef}
-							/>
+								ref={sensorIdRef}
+								>
+								{sensors?.map(house => {
+									return (
+										house.areas?.map(area => {{
+											return (
+												<optgroup label={`${house.name} - ${area.name}`}>
+													{
+														area.sensors?.map(sensor => 
+															<option value={sensor.id}>{sensor.name}</option>
+															)
+													}
+												</optgroup>
+											)
+										}})
+									)
+								})}
+							</select>
 
 							<label htmlFor="step-value">Valeur</label>
 							<input
@@ -171,7 +192,7 @@ export default function Scenario() {
 								type="text"
 								id="step-value"
 								placeholder="3"
-								ref={sensorIdRef}
+								ref={valueRef}
 							/>
 
 							<label htmlFor="step-unit">Unité</label>
