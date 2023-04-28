@@ -1,9 +1,16 @@
 import { sensorService } from '../../services/sensor.service';
 import { measurementService } from '../../services/measurement.service';
 
-let makeDataConsoAllAreasbyHouse = async id => {
+let makeDataConsoAllArea = async id => {
+	
+    let consoArea = 0;
+    
     const data = await chartDataMaker.makeDatasensors(id);
     
+    
+    consoArea = data.data.reduce((acc, curr) => acc + curr, 0);
+    
+    return {data:[consoArea], labels:['pièce']}
 };
 
 let makeDatasensors = async id => {
@@ -28,10 +35,6 @@ let makeDatasensors = async id => {
 			}
 		}
 
-		console.log('ooooh', {
-			labels: listNameSensors,
-			data: listNameConsoSensors,
-		});
 		return { labels: listNameSensors, data: listNameConsoSensors };
 	} catch (error) {
 		console.log(error);
@@ -41,5 +44,5 @@ let makeDatasensors = async id => {
 
 export const chartDataMaker = {
 	makeDatasensors,
-    makeDataConsoAllAreasbyHouse
+	makeDataConsoAllArea,
 };

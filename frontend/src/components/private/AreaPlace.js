@@ -7,40 +7,43 @@ import { chartDataMaker } from '../chart/chart.dataMaker';
 import BarchartHorizontal from '../chart/barChartHorizontal';
 
 const AreaPlace = ({ areas }) => {
-	const [dataSensors, setDataSensors] = useState({});
+	const [totalConso, setTotalConso] = useState(0);
 	const [dataByArea, setDataByArea] = useState({});
-	const [showChart, setShowChart] = useState(null); // utilisez null à la place de false
-	const barChartRef = useRef(null);
+	const [showChart, setShowChart] = useState(null);
+	const [listConsoArea, setListConsoArea] = useState({});
 
 	useEffect(() => {
-		//const data = await chartDataMaker.makeDataConsoAllAreasbyHouse(idHouse);
-	}, []);
+		areas.forEach(async area => {
+			const data = await ConsoArea(area.id);
+			setTotalConso(prevTotalConso => prevTotalConso + data.data[0]);
+			setListConsoArea(prevState => ({
+				...prevState,
+				[area.id]: data,
+			}));
+			console.log('ohoh');
+		});
+	}, [areas]);
+
+	async function ConsoArea(id) {
+		const res = await chartDataMaker.makeDataConsoAllArea(id);
+
+		return res;
+	}
 
 	async function consultSensors(id) {
 		if (showChart !== id) {
-			// utilisez l'ID de l'aire pour comparer
 			try {
 				const data = await chartDataMaker.makeDatasensors(id);
 				setDataByArea(prevState => ({
 					...prevState,
 					[id]: data,
 				}));
-				console.log('dataSensors', data);
 				setShowChart(id);
-			} catch (error) {
-				console.log(error);
-			}
+			} catch (error) {}
 		} else {
 			setShowChart(null);
 		}
 	}
-
-    async function getConsoArea(id){
-        console.log(id)
-        const data = await chartDataMaker.makeDataConsoAllAreasbyHouse(id);
-        return {data:[714],labels:['chambre 1']}
-    }
-    
 
 	return (
 		<div className="listAreas">
@@ -49,7 +52,13 @@ const AreaPlace = ({ areas }) => {
 					<div key={i}>
 						<div className="container">
 							<h1 className="titleForm">{area.name}</h1>
-							<BarchartHorizontal data={(getConsoArea(area.id))} />
+							{!listConsoArea[area.id] && <p>Loading...</p>}
+							{listConsoArea[area.id] && (
+								<BarchartHorizontal
+									maxX={totalConso}
+									data={listConsoArea[area.id]}
+								/>
+							)}
 							<button
 								onClick={() => consultSensors(area.id)}
 								className="buttonList"
@@ -58,13 +67,11 @@ const AreaPlace = ({ areas }) => {
 									? 'Voir la répartition'
 									: 'Cacher la répartition'}
 							</button>
-
-							{dataByArea[area.id]?.labels &&
-								showChart === area.id && ( // utilisez l'ID de l'aire pour comparer
-									<>
-										<BarChart data={dataByArea[area.id]} />
-									</>
-								)}
+							{dataByArea[area.id]?.labels && showChart === area.id && (
+								<>
+									<BarChart data={dataByArea[area.id]} />
+								</>
+							)}
 						</div>
 					</div>
 				);

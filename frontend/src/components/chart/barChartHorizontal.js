@@ -1,12 +1,13 @@
 import { Chart } from 'chart.js';
 import { useEffect, useRef } from 'react';
 
-const BarchartHorizontal = ({ data }) => {
+const BarchartHorizontal = ({ maxX, data }) => {
 	const canvasRef = useRef(null);
 	const barChartRef = useRef(null);
 	const chartRef = useRef(null); // nouvelle référence pour le graphique
 
 	useEffect(() => {
+		console.log('maxX : ', maxX);
 		const dataChart = {
 			labels: data.labels,
 			datasets: [
@@ -21,42 +22,33 @@ const BarchartHorizontal = ({ data }) => {
 		};
 
 		const ctx = canvasRef.current.getContext('2d');
-		
-		if (chartRef.current) { // vérifier si un graphique précédent existe
-			chartRef.current.destroy(); // détruire le graphique précédent
+
+		if (chartRef.current) {
+			chartRef.current.destroy();
 		}
-		
-		chartRef.current = new Chart(ctx, { // stocker la nouvelle référence du graphique
+
+		chartRef.current = new Chart(ctx, {
 			type: 'bar',
 			data: dataChart,
-            options: {
-                indexAxis: 'y',
-                responsive: true,
+			options: {
+				responsive: true,
+				indexAxis: 'y',
 				maintainAspectRatio: false,
-                elements: {
-                  bar: {
-                    borderWidth: 2,
-                  }
-                },
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'right',
-                  },
-                  title: {
-					display: true,
-					text: 'Consommation énergétique par mois',
-				  },
-                }
-            },
+				scales: {
+					x: {
+						beginAtZero: true,
+						max: 2000,
+					},
+				},
+			},
 		});
 	}, [data]);
 
 	return (
-        <div className='barChart'>
-            <canvas id="bar-chart" ref={canvasRef} />
-        </div>
-    );
+		<div className="barChart">
+			<canvas id="bar-chart" ref={canvasRef} />
+		</div>
+	);
 };
 
 export default BarchartHorizontal;
