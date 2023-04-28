@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 const BarchartHorizontal = ({ data }) => {
 	const canvasRef = useRef(null);
 	const barChartRef = useRef(null);
+	const chartRef = useRef(null); // nouvelle référence pour le graphique
 
 	useEffect(() => {
 		const dataChart = {
@@ -12,15 +13,20 @@ const BarchartHorizontal = ({ data }) => {
 				{
 					label: 'sensors',
 					data: data.data,
-					backgroundColor: '#36A2EB',
-					borderColor: '#36A2EB',
+					backgroundColor: '#ffa101',
+					borderColor: '#ffa101',
 					borderWidth: 1,
 				},
 			],
 		};
 
 		const ctx = canvasRef.current.getContext('2d');
-		new Chart(ctx, {
+		
+		if (chartRef.current) { // vérifier si un graphique précédent existe
+			chartRef.current.destroy(); // détruire le graphique précédent
+		}
+		
+		chartRef.current = new Chart(ctx, { // stocker la nouvelle référence du graphique
 			type: 'bar',
 			data: dataChart,
             options: {
@@ -40,17 +46,16 @@ const BarchartHorizontal = ({ data }) => {
                   title: {
 					display: true,
 					text: 'Consommation énergétique par mois',
-				},
+				  },
                 }
-              },
-
+            },
 		});
 	}, [data]);
 
 	return (
         <div className='barChart'>
-    <canvas id="bar-chart" ref={canvasRef} />
-    </div>
+            <canvas id="bar-chart" ref={canvasRef} />
+        </div>
     );
 };
 

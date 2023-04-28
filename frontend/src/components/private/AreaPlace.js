@@ -4,6 +4,7 @@ import { createBarChart } from '../chart/initCharts';
 import BarChart from '../chart/BarChat';
 import { measurementService } from '../../services/measurement.service';
 import { chartDataMaker } from '../chart/chart.dataMaker';
+import BarchartHorizontal from '../chart/barChartHorizontal';
 
 const AreaPlace = ({ areas }) => {
 	const [dataSensors, setDataSensors] = useState({});
@@ -34,6 +35,12 @@ const AreaPlace = ({ areas }) => {
 		}
 	}
 
+    async function getConsoArea(id){
+        console.log(id)
+        const data = await chartDataMaker.makeDataConsoAllAreasbyHouse(id);
+        return {data:[714],labels:['chambre 1']}
+    }
+    
 
 	return (
 		<div className="listAreas">
@@ -42,6 +49,7 @@ const AreaPlace = ({ areas }) => {
 					<div key={i}>
 						<div className="container">
 							<h1 className="titleForm">{area.name}</h1>
+							<BarchartHorizontal data={(getConsoArea(area.id))} />
 							<button
 								onClick={() => consultSensors(area.id)}
 								className="buttonList"
