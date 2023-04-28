@@ -14,6 +14,7 @@ export default function ChartPage() {
 	const indicateurRef = useRef(null);
 
 	useEffect(() => {
+		
 		createDoughnutChart(doughnutChartRef);
 		createBarChart(barChartRef);
 		indicateur(indicateurRef);

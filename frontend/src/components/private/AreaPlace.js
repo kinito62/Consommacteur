@@ -1,51 +1,68 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { sensorService } from '../../services/sensor.service';
+import { createBarChart } from '../chart/initCharts';
+import BarChart from '../chart/BarChat';
+import { measurementService } from '../../services/measurement.service';
+import { chartDataMaker } from '../chart/chart.dataMaker';
 
 const AreaPlace = ({ areas }) => {
-	const [sensors, setSensors] = useState([]);
+	const [dataSensors, setDataSensors] = useState({});
+	const [dataByArea, setDataByArea] = useState({});
+	const [showChart, setShowChart] = useState(null); // utilisez null à la place de false
+	const barChartRef = useRef(null);
+
 	useEffect(() => {
-		console.log(areas);
+		//const data = await chartDataMaker.makeDataConsoAllAreasbyHouse(idHouse);
 	}, []);
 
-	function consultSensors(id) {
-		sensorService
-			.getSensors(id)
-			.then(res => {
-				setSensors(res.data.sensors);
-			})
-			.catch(error => {
+	async function consultSensors(id) {
+		if (showChart !== id) {
+			// utilisez l'ID de l'aire pour comparer
+			try {
+				const data = await chartDataMaker.makeDatasensors(id);
+				setDataByArea(prevState => ({
+					...prevState,
+					[id]: data,
+				}));
+				console.log('dataSensors', data);
+				setShowChart(id);
+			} catch (error) {
 				console.log(error);
-			});
+			}
+		} else {
+			setShowChart(null);
+		}
 	}
+
 
 	return (
 		<div className="listAreas">
 			{areas.map((area, i) => {
 				return (
-					<div>
-						<div key={i} className="container">
+					<div key={i}>
+						<div className="container">
 							<h1 className="titleForm">{area.name}</h1>
 							<button
 								onClick={() => consultSensors(area.id)}
 								className="buttonList"
 							>
-								Voir la répartition
+								{showChart !== area.id
+									? 'Voir la répartition'
+									: 'Cacher la répartition'}
 							</button>
-						</div>
 
-						{sensors.map(sensor => {
-							return (
-								<div className="card area">
-									<div className="titleCard">
-										<a>{`sensor : ${sensor.name}`}</a>
-									</div>
-								</div>
-							);
-						})}
+							{dataByArea[area.id]?.labels &&
+								showChart === area.id && ( // utilisez l'ID de l'aire pour comparer
+									<>
+										<BarChart data={dataByArea[area.id]} />
+									</>
+								)}
+						</div>
 					</div>
 				);
 			})}
 		</div>
 	);
 };
+
 export default AreaPlace;

@@ -8,3 +8,7 @@
 .buttonList .house {
 	margin: 10px; /* ajout d'un espace de 10 pixels entre les boutons */
 }
+
+.barChart{
+	max-height: 300px;
+}

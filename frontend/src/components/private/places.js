@@ -16,7 +16,6 @@ export default function Places() {
 		if (houseId) {
 			areaService.getAreas(houseId).then(resAreas => {
 				setAreas(resAreas.data.areas);
-				console.log('areas : ', areas);
 			});
 		}
 
@@ -24,7 +23,7 @@ export default function Places() {
 			.getHouses()
 			.then(houses => {
 				setHousesList(houses.data.houses);
-				console.log('housesList', housesList);
+				
 			})
 			.catch(error => {
 				console.log(error);
