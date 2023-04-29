@@ -11,7 +11,6 @@ export default function Places() {
 	const { houseId } = useParams();
 	const navigate = useNavigate();
 	useEffect(() => {
-		console.log(houseId);
 
 		if (houseId) {
 			areaService.getAreas(houseId).then(resAreas => {
@@ -23,7 +22,6 @@ export default function Places() {
 			.getHouses()
 			.then(houses => {
 				setHousesList(houses.data.houses);
-				
 			})
 			.catch(error => {
 				console.log(error);
@@ -54,7 +52,7 @@ export default function Places() {
 					})}
 				</div>
 			</div>
-			<AreaPlace areas={areas} />
+			{houseId && <AreaPlace areas={areas} houseId={houseId} />}
 		</>
 	);
 }

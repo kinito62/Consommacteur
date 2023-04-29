@@ -1,10 +1,14 @@
 import { Chart } from 'chart.js';
 import { useEffect, useRef } from 'react';
 
-const BarchartHorizontal = ({ maxX, data }) => {
+const PieChart = ({ data }) => {
 	const canvasRef = useRef(null);
 	const barChartRef = useRef(null);
 	const chartRef = useRef(null); // nouvelle référence pour le graphique
+
+	function destroyChart() {
+		chartRef.current.destroy();
+	}
 
 	useEffect(() => {
 		const dataChart = {
@@ -13,8 +17,8 @@ const BarchartHorizontal = ({ maxX, data }) => {
 				{
 					label: 'sensors',
 					data: data.data,
-					backgroundColor: '#ffa101',
-					borderColor: '#ffa101',
+					backgroundColor: ['#36A2EB', '#31525b', '#b3dee5', '#ffa101'],
+
 					borderWidth: 1,
 				},
 			],
@@ -23,21 +27,18 @@ const BarchartHorizontal = ({ maxX, data }) => {
 		const ctx = canvasRef.current.getContext('2d');
 
 		if (chartRef.current) {
-			chartRef.current.destroy();
+			destroyChart();
 		}
 
 		chartRef.current = new Chart(ctx, {
-			type: 'bar',
+			type: 'doughnut',
 			data: dataChart,
 			options: {
 				responsive: true,
-				indexAxis: 'y',
 				maintainAspectRatio: false,
-				scales: {
-					x: {
-						beginAtZero: true,
-						max: 2000,
-					},
+				title: {
+					display: true,
+					text: 'cmmation énergétique par mois',
 				},
 			},
 		});
@@ -45,9 +46,9 @@ const BarchartHorizontal = ({ maxX, data }) => {
 
 	return (
 		<div className="barChart">
-			<canvas id="bar-chart" ref={canvasRef} />
+			<canvas id="doughnut-chart" ref={canvasRef} />
 		</div>
 	);
 };
 
-export default BarchartHorizontal;
+export default PieChart;
