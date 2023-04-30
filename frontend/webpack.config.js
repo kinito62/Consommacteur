@@ -16,36 +16,29 @@ module.exports = (env, { mode }) => ({
 	target: ['web', 'es5'],
 	// connexion webpack <-> babel :
 	module: {
-
-		
-		
-
 		rules: [
-
 			{
 				test: /\.png$/,
 				loader: 'file-loader',
 				options: {
-				  name: '[name].[ext]',
-				  outputPath: 'images/'
-				}
-			  },
-			  {
+					name: '[name].[ext]',
+					outputPath: 'images/',
+				},
+			},
+			{
 				test: /\.jpg$/,
 				loader: 'file-loader',
 				options: {
-				  name: '[name].[ext]',
-				  outputPath: 'images/'
-				}
-			  },
-			
-			
-			
+					name: '[name].[ext]',
+					outputPath: 'images/',
+				},
+			},
+
 			{
-                test: /.css$/i,
-                use: ['style-loader', 'css-loader'],
-            },	 
-	
+				test: /.css$/i,
+				use: ['style-loader', 'css-loader'],
+			},
+
 			{
 				test: /\.js$/, // tous les fichiers js ...
 				exclude: /node_modules/, // ... sauf le dossier node_modules ...
@@ -64,14 +57,12 @@ module.exports = (env, { mode }) => ({
 	devServer: {
 		historyApiFallback: true,
 		// choix du port du serveur webpack qui va servir notre application
-		port: 8000,
+		port: 8001,
 		// configuration du dossier racine du serveur
 		static: {
 			directory: './',
 			watch: false, // évite de recharger toute la page quand un fichier est modifié
-		
 		},
-		
 	},
 	devtool: 'source-map',
 });

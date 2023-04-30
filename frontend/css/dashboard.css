@@ -25,3 +25,8 @@
 	margin-top: 50px;
 	color: #31525b;
 }
+
+.active {
+	background-color: red;
+	color: white;
+}

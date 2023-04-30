@@ -21,6 +21,7 @@ const PrivateRouter = () => {
 				<Route path="dashboard" element={<Dashboard />} />
 				<Route path="places" element={<Places />} />
 				<Route path="places/:houseId" element={<Places />} />
+				<Route path="dashboard/:houseId" element={<Dashboard />} />
 				<Route path="profile" element={<Profili />} />
 				<Route path="suggestions" element={<Suggestions />} />
 

@@ -20,7 +20,7 @@ renseigner les variables d'environnement dans un fichier .env
 
 ```conf
 # app configuration
-PORT=3000
+PORT=3001
 JWT_SECRET=randomjwtsecret
 # db configuration
 DB_NAME=yourdbname
@@ -34,6 +34,7 @@ DB_DIALECT=mysql
 ## Lancement des serveurs
 
 ### Backend
+
 ```bash
 cd backend
 npm start
@@ -45,4 +46,3 @@ npm start
 cd frontend
 npm start
 ```
-

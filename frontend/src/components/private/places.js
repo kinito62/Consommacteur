@@ -23,7 +23,6 @@ export default function Places() {
 			.getHouses()
 			.then(houses => {
 				setHousesList(houses.data.houses);
-				
 			})
 			.catch(error => {
 				console.log(error);
@@ -38,14 +37,15 @@ export default function Places() {
 	return (
 		<>
 			<div className="container">
-				<h1 className="titleForm">liste des Maisons</h1>
+				<h1 className="titleForm">Liste des Maisons</h1>
 				<div className="buttonsHouses">
 					{housesList.map(house => {
+						let active = house.id == houseId ? 'active' : '';
 						return (
 							<div key={house.id}>
 								<button
 									onClick={() => consultHouse(house.id)}
-									className="buttonList house"
+									className={`buttonList house ${active}`}
 								>
 									{house.name}
 								</button>

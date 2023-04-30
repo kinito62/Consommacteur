@@ -5,7 +5,6 @@ import dataIndicateur from './../../../data/components/dataIndicateur.json';
 
 export const createDoughnutChart = canvasRef => {
 	const myChartRef = canvasRef.current.getContext('2d');
-
 	new Chart(myChartRef, {
 		type: 'doughnut',
 		data: dataConsommation,
@@ -19,6 +18,23 @@ export const createDoughnutChart = canvasRef => {
 		},
 	});
 };
+
+export function createChartDoughnut(canvasRef, data) {
+	const myChartRef = canvasRef.current.getContext('2d');
+
+	new Chart(myChartRef, {
+		type: 'doughnut',
+		data: data,
+		options: {
+			//responsive: true,
+			//maintainAspectRatio: false,
+			title: {
+				display: true,
+				text: 'Répartition de la consommation énergétique',
+			},
+		},
+	});
+}
 
 export const createBarChart = canvasRef => {
 	const myChartRef = canvasRef.current.getContext('2d');

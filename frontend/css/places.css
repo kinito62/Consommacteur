@@ -12,3 +12,8 @@
 .barChart{
 	max-height: 300px;
 }
+
+.house.active {
+	background-color: #ffa101 !important;
+	color: white;
+}

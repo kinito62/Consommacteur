@@ -1,48 +1,60 @@
-import '../../../css/dashboard.css';
-import '../../../css/offers.css';
+import { useEffect, useState } from 'react';
+import { houseService } from '../../services/house.service';
+import '../../../css/places.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import { areaService } from '../../services/area.service';
+import AreaPlaceDashboard from './AreaDashboard';
 
-import React, { useRef, useEffect } from 'react';
-import {
-	createDoughnutChart,
-	createBarChart,
-	indicateur,
-} from '../chart/initCharts';
-
-export default function ChartPage() {
-	const doughnutChartRef = useRef(null);
-	const barChartRef = useRef(null);
-	const indicateurRef = useRef(null);
-
+export default function dashboard() {
+	const [housesList, setHousesList] = useState([]);
+	const [areas, setAreas] = useState([]);
+	const { houseId } = useParams();
+	const navigate = useNavigate();
 	useEffect(() => {
-		
-		createDoughnutChart(doughnutChartRef);
-		createBarChart(barChartRef);
-		indicateur(indicateurRef);
+		async function getData() {
+			if (houseId) {
+				const resAreas = await areaService.getAreas(houseId);
+				setAreas(resAreas.data.areas);
+			}
+			houseService
+				.getHouses()
+				.then(houses => {
+					setHousesList(houses.data.houses);
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}
+		getData();
 	}, []);
 
+	function consultHouse(id) {
+		navigate(`/conn/dashboard/${id}`);
+		location.reload();
+	}
+
 	return (
-		<div className="container">
-			<div>
-				<h1 className="titleForm">Tableau de bord </h1>
-				<h2 className="titleHome">
-					Répartition de la consommation énergétique
-				</h2>
-				<div className="offerContainer">
-					<canvas id="doughnut-chart" ref={doughnutChartRef} />
+		<>
+			<div className="container">
+				<h1 className="titleForm">Liste des Maisons</h1>
+				<div className="buttonsHouses">
+					{housesList.map(house => {
+						let active = house.id == houseId ? 'active' : '';
+						return (
+							<div key={house.id}>
+								<button
+									id={house.id}
+									onClick={() => consultHouse(house.id)}
+									className={`buttonList house ${active}`}
+								>
+									{house.name}
+								</button>
+							</div>
+						);
+					})}
 				</div>
-				<h2 className="titleHome">
-					Historique de la consommation énergétique par mois
-				</h2>
-				<div className="offerContainer">
-					<canvas id="bar-chart" ref={barChartRef} />
-				</div>
-				<h2 className="titleHome">Indicateur de votre consommation</h2>
-				<div className="offerContainer">
-					<canvas id="bar-chart" ref={indicateurRef} />
-				</div>
-				<h2 className="titleHome">Vos accès rapides</h2>
-				<div className="offerContainer"></div>
 			</div>
-		</div>
+			<AreaPlaceDashboard areas={areas} />
+		</>
 	);
 }

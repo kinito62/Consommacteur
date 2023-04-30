@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+
 import Menu from './menu';
 import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
@@ -12,6 +13,7 @@ import PrivateRouter from './components/private/PrivateRouter';
 import {RecoilRoot} from 'recoil'
 import Error from '../utils/error';
 import Welcome from '../utils/welcome';
+
 const root = createRoot(document.querySelector('.appContainer'));
 root.render(
 	<>
