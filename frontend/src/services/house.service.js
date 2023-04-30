@@ -13,7 +13,6 @@ let createHouse = (credentials) => {
 }
 
 let deleteHouse = id => {
-    console.log(id)
     return Axios.delete(`/houses/${id}`)
 }
 

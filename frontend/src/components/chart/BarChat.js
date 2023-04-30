@@ -24,7 +24,6 @@ const Barchart = ({ data }) => {
 			type: 'bar',
 			data: dataChart,
 			options: {
-                
 				responsive: true,
 				maintainAspectRatio: false,
 				title: {
@@ -36,10 +35,10 @@ const Barchart = ({ data }) => {
 	}, [data]);
 
 	return (
-        <div className='barChart'>
-    <canvas id="bar-chart" ref={canvasRef} />
-    </div>
-    );
+		<div className="barChart">
+			<canvas id="bar-chart" ref={canvasRef} />
+		</div>
+	);
 };
 
 export default Barchart;
