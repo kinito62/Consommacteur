@@ -6,16 +6,20 @@ import { areaService } from '../../services/area.service';
 import AreaPlace from './AreaPlace';
 import AreaChart from '../chart/AreaChart';
 import { chartDataMaker } from '../chart/chart.dataMaker';
+import AutoRefresh from '../../_helpers/AutoRefresh';
+
 export default function Places() {
 	const [housesList, setHousesList] = useState([]);
 	const [areas, setAreas] = useState([]);
 	const { houseId } = useParams();
 	const [dataAllHouses, setAllDataHouses] = useState({});
 	const navigate = useNavigate();
+	const [refreshCount, setRefreshCount] = useState(0);
+
 	useEffect(() => {
 		(async () => {
 			const dataAllHouse = await chartDataMaker.makeDataAllHouses();
-			
+
 			setAllDataHouses(dataAllHouse);
 
 			if (houseId) {
@@ -33,15 +37,20 @@ export default function Places() {
 					console.log(error);
 				});
 		})();
-	}, []);
+	}, [houseId, refreshCount]);
 
 	function consultHouse(id) {
 		navigate(`/conn/places/${id}`);
 		location.reload();
 	}
 
+	function triggerRefresh() {
+		setRefreshCount(count => count + 1);
+	}
+
 	return (
 		<>
+			<AutoRefresh intervalTime={15000} refreshFunction={triggerRefresh} />
 			<div className="container">
 				<h1 className="titleForm">Liste des Maisons</h1>
 				<AreaChart data={dataAllHouses} />
