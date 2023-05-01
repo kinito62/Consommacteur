@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import offers from '../../../data/components/offers.json'
 import '../../../css/offers.css'
+import boitier21 from '../../img/offers/boitier21.png'
+import boitier22 from '../../img/offers/boitier22.png'
 export default class Offers extends React.Component {
 
    
@@ -17,8 +19,8 @@ export default class Offers extends React.Component {
                                 <div className='offerContainer' key={offer.id}>
                                     <div className="cardTitleOffer">{offer.name}</div>
                                         <div className="cardImgsOffer"> 
-                                            <img className="cardImgOffer" src={`../img/offers/${offer.photo[0]}.jpg`} />
-                                            <img className="cardImgOffer" src={`../img/offers/${offer.photo[1]}.jpg`} />
+                                            <img className="cardImgOffer" src={boitier21} />
+                                            <img className="cardImgOffer" src={boitier22} />
                                         </div>
                                     <p className="card_text">{offer.description}</p>
                                     <div className='row'>
