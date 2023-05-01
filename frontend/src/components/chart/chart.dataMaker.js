@@ -1,29 +1,47 @@
 import { sensorService } from '../../services/sensor.service';
 import { measurementService } from '../../services/measurement.service';
+import { houseService } from '../../services/house.service';
+import { areaService } from '../../services/area.service';
+let makeDataAllHouses = async () => {
+	let res = { data: [], labels: [] };
 
+	try {
+		const houses = await houseService.getHouses();
+		for (const house of houses.data.houses) {
+			res.labels.push(house.name);
+			
+			const areas = await areaService.getAreas(house.id);
+			const dataAreas = await chartDataMaker.makeDataHouse(areas.data.areas);
 
-let makeDataHouse = async (areas, id) => {
+			res.data.push(dataAreas.data.reduce((acc, curr) => acc + curr, 0));
+		}
+	} catch (error) {
+		console.log(error);
+	}
+	return res;
+};
+
+let makeDataHouse = async areas => {
 	let res = { data: [], labels: [] };
 
 	for (const area of areas) {
 		res.labels.push(area.name);
 		const datasensors = await chartDataMaker.makeDataConsoAllArea(area.id);
-		res.data.push(datasensors.data.reduce((acc, curr) => acc + curr, 0));
+		const sum = datasensors.data.reduce((acc, curr) => acc + curr, 0);
+		res.data.push(sum);
 	}
 
 	return res;
 };
 
 let makeDataConsoAllArea = async id => {
-	
-    let consoArea = 0;
-    
-    const data = await chartDataMaker.makeDatasensors(id);
-    
-    
-    consoArea = data.data.reduce((acc, curr) => acc + curr, 0);
-    
-    return {data:[consoArea], labels:['pièce']}
+	let consoArea = 0;
+
+	const data = await chartDataMaker.makeDatasensors(id);
+
+	consoArea = data.data.reduce((acc, curr) => acc + curr, 0);
+
+	return { data: [consoArea], labels: ['pièce'] };
 };
 
 let makeDatasensors = async id => {
@@ -56,7 +74,8 @@ let makeDatasensors = async id => {
 };
 
 export const chartDataMaker = {
-    makeDataHouse,
+	makeDataAllHouses,
+	makeDataHouse,
 	makeDatasensors,
 	makeDataConsoAllArea,
 };

@@ -1,7 +1,7 @@
 import { Chart } from 'chart.js';
 import { useEffect, useRef } from 'react';
 
-const PieChart = ({ data }) => {
+const AreaChart = ({ data }) => {
 	const canvasRef = useRef(null);
 	const barChartRef = useRef(null);
 	const chartRef = useRef(null); // nouvelle référence pour le graphique
@@ -17,7 +17,7 @@ const PieChart = ({ data }) => {
 				{
 					label: 'sensors',
 					data: data.data,
-					backgroundColor: [ '#31525b', '#b3dee5', '#ffa101'],
+					backgroundColor: ['#31525b', '#b3dee5', '#ffa101'],
 
 					borderWidth: 1,
 				},
@@ -31,14 +31,14 @@ const PieChart = ({ data }) => {
 		}
 
 		chartRef.current = new Chart(ctx, {
-			type: 'doughnut',
+			type: 'polarArea',
 			data: dataChart,
 			options: {
 				responsive: true,
 				maintainAspectRatio: false,
 				title: {
 					display: true,
-					text: 'cmmation énergétique par mois',
+					text: 'consommation énergétique par mois',
 				},
 			},
 		});
@@ -46,9 +46,9 @@ const PieChart = ({ data }) => {
 
 	return (
 		<div className="barChart">
-			<canvas id="doughnut-chart" ref={canvasRef} />
+			<canvas id="Area-chart" ref={canvasRef} />
 		</div>
 	);
 };
 
-export default PieChart;
+export default AreaChart;

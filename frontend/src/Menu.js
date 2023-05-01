@@ -104,7 +104,7 @@ export default function Menu() {
           <div className="espMem">
             <NavLink to="/conn/suggestions">
             
-              <button type="button">
+              <button type="button" disabled>
               
                 <p><img className="fit-picture" src={idea}/>Mes suggestions</p>
                 </button>

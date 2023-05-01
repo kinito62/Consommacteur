@@ -22,7 +22,7 @@ const AreaPlace = ({ areas, houseId }) => {
 		});
 
 		const fetchData = async () => {
-			const dataAllArea = await chartDataMaker.makeDataHouse(areas, houseId);
+			const dataAllArea = await chartDataMaker.makeDataHouse(areas);
 			setTotalConsoArea(dataAllArea);
 
 			for (const area of areas) {

@@ -57,7 +57,7 @@ module.exports = (env, { mode }) => ({
 	devServer: {
 		historyApiFallback: true,
 		// choix du port du serveur webpack qui va servir notre application
-		port: 8001,
+		port: 8000,
 		// configuration du dossier racine du serveur
 		static: {
 			directory: './',
