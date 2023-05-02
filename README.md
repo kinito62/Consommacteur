@@ -78,4 +78,4 @@ mot de passe : PollosH3rmanos
 
 ### Démarrer les scénarios de simulation
 
-Rendez-vous dans l'onglet administration sur la plateforme, puis cliquez sur le bouton consulter d'un scenario. Cliquez sur le bouton démarrer. Vous pourrer constater dans l'onget mes places que les données évoluent en temps réél.
+Rendez-vous dans l'onglet administration sur la plateforme, puis cliquez sur le bouton consulter d'un scenario. Cliquez sur le bouton démarrer. Vous pourrer constater dans l'onget mes places que les données évoluent en temps réél. veillez à lancer tout les scénarios pour une immersion maximale
