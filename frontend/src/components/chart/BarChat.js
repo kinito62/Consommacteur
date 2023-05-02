@@ -10,10 +10,9 @@ const Barchart = ({ data }) => {
 			labels: data.labels,
 			datasets: [
 				{
-					label: 'sensors',
+					label: 'consommation',
 					data: data.data,
-					backgroundColor: '#36A2EB',
-					borderColor: '#36A2EB',
+					backgroundColor: '#b3dee5',
 					borderWidth: 1,
 				},
 			],
