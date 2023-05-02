@@ -15,9 +15,9 @@ const PieChart = ({ data }) => {
 			labels: data.labels,
 			datasets: [
 				{
-					label: 'sensors',
+					label: 'consommation',
 					data: data.data,
-					backgroundColor: [ '#31525b', '#b3dee5', '#ffa101'],
+					backgroundColor: [ '#31525b', '#b3dee5', '#ffa101', '#fae6b1'],
 
 					borderWidth: 1,
 				},
