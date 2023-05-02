@@ -4,12 +4,14 @@ import '../../../css/places.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { areaService } from '../../services/area.service';
 import AreaPlaceDashboard from './AreaDashboard';
+import AutoRefresh from '../../_helpers/AutoRefresh';
 
 export default function dashboard() {
 	const [housesList, setHousesList] = useState([]);
 	const [areas, setAreas] = useState([]);
 	const { houseId } = useParams();
 	const navigate = useNavigate();
+	const [refreshCount, setRefreshCount] = useState(0);
 	useEffect(() => {
 		async function getData() {
 			if (houseId) {
@@ -26,15 +28,20 @@ export default function dashboard() {
 				});
 		}
 		getData();
-	}, []);
+	}, [refreshCount]);
 
 	function consultHouse(id) {
 		navigate(`/conn/dashboard/${id}`);
 		location.reload();
 	}
 
+	function triggerRefresh() {
+		setRefreshCount(count => count + 1);
+	}
+
 	return (
 		<>
+			<AutoRefresh intervalTime={15000} refreshFunction={triggerRefresh} />
 			<div className="container">
 				<h1 className="titleForm">Liste des Maisons</h1>
 				<div className="buttonsHouses">
