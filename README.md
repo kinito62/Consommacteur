@@ -71,7 +71,11 @@ npm start
 
 ### Connexion
 
+```
 email : walter.white@heisenberg.com
 mot de passe : PollosH3rmanos
+```
 
-si suppression de sensors -> supprimer les étapes liées
+### Démarrer les scénarios de simulation
+
+Rendez-vous dans l'onglet administration sur la plateforme, puis cliquez sur le bouton consulter d'un scenario. Cliquez sur le bouton démarrer. Vous pourrer constater dans l'onget mes places que les données évoluent en temps réél.
