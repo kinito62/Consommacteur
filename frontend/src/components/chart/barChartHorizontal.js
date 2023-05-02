@@ -36,7 +36,7 @@ const BarchartHorizontal = ({ maxX, data }) => {
 				scales: {
 					x: {
 						beginAtZero: true,
-						max: 2000,
+						max: 30,
 					},
 				},
 			},
