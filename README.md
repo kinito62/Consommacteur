@@ -46,3 +46,12 @@ npm start
 cd frontend
 npm start
 ```
+
+## Utilisation
+
+### Connexion
+
+email : walter.white@heisenberg.com
+mot de passe : PollosH3rmanos
+
+si suppression de sensors -> supprimer les étapes liées
