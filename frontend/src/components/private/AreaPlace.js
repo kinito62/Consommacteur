@@ -7,6 +7,7 @@ import { chartDataMaker } from '../chart/chart.dataMaker';
 import BarchartHorizontal from '../chart/barChartHorizontal';
 import { houseService } from '../../services/house.service';
 import PieChart from '../chart/PieChart';
+import AutoRefresh from '../../_helpers/AutoRefresh';
 
 const AreaPlace = ({ areas, houseId }) => {
 	const [totalConso, setTotalConso] = useState(0);
@@ -15,7 +16,7 @@ const AreaPlace = ({ areas, houseId }) => {
 	const [listConsoArea, setListConsoArea] = useState({});
 	const [house, setHouse] = useState({});
 	const [TotalConsoArea, setTotalConsoArea] = useState({});
-
+	const [refreshCount, setRefreshCount] = useState(0);
 	useEffect(() => {
 		houseService.getHouse(houseId).then(house => {
 			setHouse(house.data.house);
@@ -36,7 +37,7 @@ const AreaPlace = ({ areas, houseId }) => {
 		};
 
 		fetchData();
-	}, [areas]);
+	}, [areas, refreshCount]);
 
 	async function ConsoArea(id) {
 		const res = await chartDataMaker.makeDataConsoAllArea(id);
@@ -58,9 +59,13 @@ const AreaPlace = ({ areas, houseId }) => {
 			setShowChart(null);
 		}
 	}
+	function triggerRefresh() {
+		setRefreshCount(count => count + 1);
+	}
 
 	return (
 		<>
+			<AutoRefresh intervalTime={15000} refreshFunction={triggerRefresh} />
 			<div className="container">
 				<h1 className="titleForm">{house.name}</h1>
 				{<PieChart data={TotalConsoArea} />}
